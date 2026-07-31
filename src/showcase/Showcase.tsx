@@ -212,6 +212,8 @@ import { Changelog } from '../components/Changelog'
 import { RichTextEditor } from '../components/RichTextEditor'
 import { CatalogShell, Plate } from './CatalogShell'
 import { Plates99to152 } from './Plates99to152'
+import { Plates153to164 } from './Plates153to164'
+import { Plates165to168 } from './Plates165to168'
 
 const MONTHLY_CHART = [
   { mes: 'Jan', leituras: 42, alertas: 8, meta: 50 },
@@ -2550,6 +2552,10 @@ function ShowcaseBody() {
       </Plate>
 
       <Plates99to152 />
+
+      <Plates153to164 />
+
+      <Plates165to168 />
     </>
   )
 }

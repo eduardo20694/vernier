@@ -5,6 +5,7 @@ import { Badge } from '../components/Badge'
 import { Kbd } from '../components/Kbd'
 import { EmptyState } from '../components/EmptyState'
 import { Button } from '../components/Button'
+import { SegmentedControl } from '../components/SegmentedControl'
 import { applyTheme, hydrateTheme, readStoredTheme, type VernierTheme } from '../lib/theme'
 import {
   CATEGORIES,
@@ -13,6 +14,15 @@ import {
   plateMatches,
   type CatalogCategory,
 } from './catalog'
+import {
+  PAGE_KINDS,
+  TOTAL_PAGES,
+  countVisiblePages,
+  type PageKind,
+} from './pages/registry'
+import { PagesGallery } from './pages/PagesGallery'
+
+export type CatalogViewMode = 'components' | 'pages'
 
 interface CatalogFilterValue {
   query: string
@@ -20,6 +30,11 @@ interface CatalogFilterValue {
   setQuery: (q: string) => void
   setCategory: (c: CatalogCategory) => void
   visibleCount: number
+  viewMode: CatalogViewMode
+  setViewMode: (m: CatalogViewMode) => void
+  pageKind: PageKind | 'all'
+  setPageKind: (k: PageKind | 'all') => void
+  visiblePageCount: number
 }
 
 const CatalogFilterContext = createContext<CatalogFilterValue | null>(null)
@@ -33,12 +48,16 @@ export function useCatalogFilter() {
 export function CatalogShell({ children }: { children: ReactNode }) {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<CatalogCategory>('all')
+  const [viewMode, setViewMode] = useState<CatalogViewMode>('components')
+  const [pageKind, setPageKind] = useState<PageKind | 'all'>('all')
   const [theme, setTheme] = useState<VernierTheme>(() => {
     if (typeof document === 'undefined') return 'dark'
     return document.documentElement.classList.contains('light') ? 'light' : 'dark'
   })
   const switchTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const visibleCount = useMemo(() => countVisible(query, category), [query, category])
+  const visiblePageCount = useMemo(() => countVisiblePages(query, pageKind), [query, pageKind])
+  const isPagesMode = viewMode === 'pages'
 
   useEffect(() => {
     hydrateTheme()
@@ -79,12 +98,33 @@ export function CatalogShell({ children }: { children: ReactNode }) {
   }
 
   const value = useMemo(
-    () => ({ query, category, setQuery, setCategory, visibleCount }),
-    [query, category, visibleCount]
+    () => ({
+      query,
+      category,
+      setQuery,
+      setCategory,
+      visibleCount,
+      viewMode,
+      setViewMode,
+      pageKind,
+      setPageKind,
+      visiblePageCount,
+    }),
+    [query, category, visibleCount, viewMode, pageKind, visiblePageCount]
   )
 
   const themeLabel = theme === 'dark' ? 'Dia' : 'Noite'
   const themeAria = theme === 'dark' ? 'Ativar modo dia' : 'Ativar modo noite'
+
+  const catalogSubtitle = isPagesMode
+    ? `catálogo · ${TOTAL_PAGES} páginas`
+    : `catálogo · ${TOTAL_PLATES} pranchas`
+
+  const searchPlaceholder = isPagesMode
+    ? 'Filtrar páginas — landing, admin, blog…'
+    : 'Filtrar peças — tipografia, sheet, gauge…'
+
+  const showComponentsEmpty = !isPagesMode && visibleCount === 0
 
   return (
     <CatalogFilterContext.Provider value={value}>
@@ -101,14 +141,16 @@ export function CatalogShell({ children }: { children: ReactNode }) {
                 <div>
                   <p className="font-display text-lg leading-none tracking-tight text-vellum">Vernier</p>
                   <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-vellum-faint">
-                    catálogo · {TOTAL_PLATES} pranchas
+                    {catalogSubtitle}
                   </p>
                 </div>
               </a>
 
               <div className="ml-auto flex items-center gap-2.5 sm:gap-3">
                 <Badge tone="neutral" className="hidden sm:inline-flex">
-                  {visibleCount} / {TOTAL_PLATES}
+                  {isPagesMode
+                    ? `${visiblePageCount} / ${TOTAL_PAGES}`
+                    : `${visibleCount} / ${TOTAL_PLATES}`}
                 </Badge>
                 <div className="hidden items-center gap-1.5 text-xs text-vellum-faint lg:flex">
                   <span>buscar</span>
@@ -130,39 +172,66 @@ export function CatalogShell({ children }: { children: ReactNode }) {
               </div>
             </div>
 
+            <div className="flex flex-wrap items-center gap-3">
+              <SegmentedControl
+                value={viewMode}
+                onChange={setViewMode}
+                options={[
+                  { value: 'components', label: 'Componentes' },
+                  { value: 'pages', label: 'Páginas' },
+                ]}
+                size="sm"
+              />
+            </div>
+
             <div className="flex flex-col gap-3.5 xl:flex-row xl:items-center xl:gap-5">
               <SearchInput
                 id="catalog-search"
                 className="w-full xl:w-[22rem] xl:shrink-0"
-                placeholder="Filtrar peças — tipografia, sheet, gauge…"
+                placeholder={searchPlaceholder}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onClear={() => setQuery('')}
               />
 
               <div className="flex min-w-0 flex-1 gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {CATEGORIES.map((c) => {
-                  const active = category === c.id
-                  return (
-                    <button
-                      key={c.id}
-                      type="button"
-                      onClick={() => setCategory(c.id)}
-                      data-active={active}
-                      className="catalog-tab focus-ring"
-                    >
-                      {c.label}
-                    </button>
-                  )
-                })}
+                {isPagesMode
+                  ? PAGE_KINDS.map((k) => {
+                      const active = pageKind === k.id
+                      return (
+                        <button
+                          key={k.id}
+                          type="button"
+                          onClick={() => setPageKind(k.id)}
+                          data-active={active}
+                          className="catalog-tab focus-ring"
+                        >
+                          {k.label}
+                        </button>
+                      )
+                    })
+                  : CATEGORIES.map((c) => {
+                      const active = category === c.id
+                      return (
+                        <button
+                          key={c.id}
+                          type="button"
+                          onClick={() => setCategory(c.id)}
+                          data-active={active}
+                          className="catalog-tab focus-ring"
+                        >
+                          {c.label}
+                        </button>
+                      )
+                    })}
               </div>
             </div>
           </div>
         </header>
 
-        <main className="relative mx-auto max-w-[1400px] px-5 pb-28 pt-8 sm:px-8 lg:px-10">
-          {children}
-          {visibleCount === 0 && (
+        <main id="topo" className="relative mx-auto max-w-[1400px] px-5 pb-28 pt-8 sm:px-8 lg:px-10">
+          {isPagesMode ? <PagesGallery /> : children}
+          {showComponentsEmpty && (
             <EmptyState
               className="catalog-empty mx-auto mt-10 max-w-lg"
               icon={<Search className="h-5 w-5" />}
@@ -203,7 +272,8 @@ export function Plate({
   title: string
   children: ReactNode
 }) {
-  const { query, category } = useCatalogFilter()
+  const { query, category, viewMode } = useCatalogFilter()
+  if (viewMode === 'pages') return null
   const visible = plateMatches(number, title, query, category)
   const id = `plate-${number}`
 

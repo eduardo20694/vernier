@@ -185,6 +185,22 @@ export const PLATES: PlateMeta[] = [
   { number: '150', title: 'Language switcher', category: 'nav', keywords: 'language switcher idioma locale' },
   { number: '151', title: 'Theme toggle', category: 'acoes', keywords: 'theme toggle dia noite dark light' },
   { number: '152', title: 'Confirm delete', category: 'overlay', keywords: 'confirm delete excluir alerta dialog' },
+  { number: '153', title: 'Landing pages', category: 'layout', keywords: 'landing page receita hero pricing faq saas' },
+  { number: '154', title: 'Blog listing', category: 'layout', keywords: 'blog listing postcard grid posts' },
+  { number: '155', title: 'Contato', category: 'layout', keywords: 'contact contato lead formulário mapa' },
+  { number: '156', title: 'Bottom tabs', category: 'nav', keywords: 'bottom tab bar mobile chrome app' },
+  { number: '157', title: 'Form kit', category: 'forms', keywords: 'form rhf zod validação react-hook-form' },
+  { number: '158', title: 'Product card', category: 'layout', keywords: 'product card grid comércio catalog' },
+  { number: '159', title: 'Cart drawer', category: 'overlay', keywords: 'cart drawer carrinho sheet checkout' },
+  { number: '160', title: 'Order summary', category: 'layout', keywords: 'order summary pedido checkout resumo' },
+  { number: '161', title: 'Billing', category: 'forms', keywords: 'billing plano fatura pagamento saas' },
+  { number: '162', title: 'Search results', category: 'dados', keywords: 'search results busca filtros empty' },
+  { number: '163', title: 'Onboarding', category: 'feedback', keywords: 'onboarding checklist first-run' },
+  { number: '164', title: 'Booking', category: 'forms', keywords: 'booking agenda horários agendamento' },
+  { number: '165', title: 'Course card', category: 'layout', keywords: 'course card lms curso aula progresso grid' },
+  { number: '166', title: 'Feed post', category: 'layout', keywords: 'feed post social timeline curtir comentar' },
+  { number: '167', title: 'Property card', category: 'layout', keywords: 'property card imóvel real estate quartos preço' },
+  { number: '168', title: 'Event card', category: 'layout', keywords: 'event card evento ingresso data venue' },
 ]
 
 export const TOTAL_PLATES = PLATES.length
