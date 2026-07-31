@@ -7,8 +7,29 @@
   scrollbar-color: #3A342C transparent;
 }
 
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  font-feature-settings: "tnum" 1;
+  font-feature-settings: "ss01" 1, "kern" 1;
+  font-optical-sizing: auto;
+}
+
+::selection {
+  background: rgba(201, 166, 107, 0.35);
+  color: #EDE8DF;
+}
+
+.font-display {
+  font-optical-sizing: auto;
+  font-feature-settings: "SOFT" 1, "WONK" 0.5;
+}
+
+.font-mono {
+  font-feature-settings: "tnum" 1, "zero" 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

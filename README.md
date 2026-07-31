@@ -10,13 +10,13 @@ Cada um dos seus projetos de infra tem sua própria identidade visual: o Dockwat
 
 **Elemento-assinatura:** cada componente na vitrine (`npm run dev`) aparece dentro de um "quadro de ferramenta" — o contorno tracejado atrás, como um pegboard de oficina que mostra "aqui é o lugar desta peça".
 
-## O que já tem (33+ pranchas)
+## O que já tem (~55 peças)
 
-Base: Botão (incluindo **gradient / forged / glow**), IconButton, Input, Textarea, Card, InstrumentCard, Badge, Switch, Checkbox, Select, Tabs, Dropdown, Tooltip, Dialog, Table, Sidebar, Alert, Progress, Skeleton, Toast, Pagination, EmptyState, Kbd.
+**Tipografia de site:** Display, Heading 1–4, Lead, Text, Caption, Overline, InlineCode, Prose, Blockquote, Link — escala completa em `tokens.json` (Fraunces + General Sans + Space Mono, optical sizing, measure ~65ch).
 
-Premium: Gauge (manômetro), Stat, SegmentedControl, Callout, Avatar, Chip, StatusDot, Divider ornate, Slider de latão, Breadcrumb, Timeline.
+**UI completa:** botões (gradient/forged/glow), formulários (Input, Textarea, Password, Search, Number, Radio, Fieldset), overlays (Dialog, Sheet, Popover, HoverCard, Toast), navegação (Navbar, Sidebar, Tabs, Breadcrumb, Stepper, Pagination), dados (Table, Stat, Gauge, Timeline, CodeBlock), feedback (Alert, Banner, Spinner, Skeleton, EmptyState, Progress) e mais.
 
-Radix UI onde faz sentido (foco/teclado/a11y), com a camada visual da Vernier por cima — gradientes metálicos, filetes, glows e tipografia de instrumento.
+Radix UI onde faz sentido; Tailwind com tokens, glows e metal fundido.
 
 ## Rodando a vitrine
 
@@ -34,10 +34,9 @@ Já que é uso pessoal (não vai virar pacote publicado), o caminho mais simples
 ## Próximas pranchas (ainda não construídas)
 
 - Combobox / Command palette
-- Popover
-- Sheet (painel lateral)
-- Date picker
-- Combinações compostas (toolbar, filter bar)
+- Date / Calendar
+- Menubar / Context menu
+- Data table com sort/filter
 
 ## Servidor MCP
 

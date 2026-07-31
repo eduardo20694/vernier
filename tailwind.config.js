@@ -17,6 +17,7 @@ export default {
         vellum: tokens.colors.vellum,
       },
       fontFamily: tokens.fontFamily,
+      fontSize: tokens.fontSize,
       borderRadius: tokens.borderRadius,
       boxShadow: {
         plate: '0 1px 0 rgba(0,0,0,0.4), 0 8px 20px rgba(0,0,0,0.35)',
@@ -29,17 +30,34 @@ export default {
         'panel-recess':
           'linear-gradient(180deg, #1B1815 0%, #24211D 55%, #2C2822 100%)',
       },
+      letterSpacing: {
+        display: '-0.035em',
+        tightest: '-0.03em',
+      },
+      maxWidth: {
+        prose: '42rem',
+        measure: '65ch',
+      },
       keyframes: {
-        'sheen': {
+        sheen: {
           '0%': { transform: 'translateX(-120%) skewX(-20deg)' },
           '100%': { transform: 'translateX(220%) skewX(-20deg)' },
+        },
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
       },
       animation: {
         sheen: 'sheen 1.1s ease-in-out',
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },
   plugins: [require('tailwindcss-animate')],
 }
-

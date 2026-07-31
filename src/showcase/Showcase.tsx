@@ -2,6 +2,7 @@ import { useState } from 'react'
 import {
   Activity,
   Box,
+  ChevronDown,
   Gauge as GaugeIcon,
   Layers,
   Play,
@@ -16,11 +17,15 @@ import { Button } from '../components/Button'
 import { IconButton } from '../components/IconButton'
 import { Input } from '../components/Input'
 import { Textarea } from '../components/Textarea'
+import { PasswordInput } from '../components/PasswordInput'
+import { SearchInput } from '../components/SearchInput'
+import { NumberField } from '../components/NumberField'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/Card'
 import { InstrumentCard } from '../components/InstrumentCard'
 import { Badge } from '../components/Badge'
 import { Switch } from '../components/Switch'
 import { Checkbox } from '../components/Checkbox'
+import { RadioGroup, RadioGroupItem } from '../components/RadioGroup'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/Tabs'
 import { TooltipProvider, Tooltip } from '../components/Tooltip'
 import {
@@ -31,6 +36,7 @@ import {
   DropdownMenuSeparator,
 } from '../components/DropdownMenu'
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from '../components/Dialog'
+import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from '../components/Sheet'
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../components/Table'
 import { Sidebar } from '../components/Sidebar'
 import {
@@ -46,6 +52,7 @@ import {
 import { Alert } from '../components/Alert'
 import { Progress } from '../components/Progress'
 import { Skeleton } from '../components/Skeleton'
+import { Spinner } from '../components/Spinner'
 import { ToastProvider, useToast } from '../components/Toast'
 import { Pagination } from '../components/Pagination'
 import { EmptyState } from '../components/EmptyState'
@@ -61,6 +68,32 @@ import { Divider } from '../components/Divider'
 import { Slider } from '../components/Slider'
 import { Breadcrumb } from '../components/Breadcrumb'
 import { Timeline } from '../components/Timeline'
+import {
+  Display,
+  Heading,
+  Lead,
+  Text,
+  Caption,
+  Overline,
+  InlineCode,
+  Prose,
+} from '../components/Typography'
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../components/Accordion'
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '../components/Collapsible'
+import { Popover, PopoverTrigger, PopoverContent } from '../components/Popover'
+import { HoverCard, HoverCardTrigger, HoverCardContent } from '../components/HoverCard'
+import { ScrollArea } from '../components/ScrollArea'
+import { FileDropzone } from '../components/FileDropzone'
+import { Stepper } from '../components/Stepper'
+import { Navbar, NavLink } from '../components/Navbar'
+import { Stack } from '../components/Layout'
+import { Link } from '../components/Link'
+import { Blockquote } from '../components/Blockquote'
+import { CodeBlock } from '../components/CodeBlock'
+import { Banner } from '../components/Banner'
+import { CopyButton } from '../components/CopyButton'
+import { AspectRatio } from '../components/AspectRatio'
+import { Fieldset, Field } from '../components/Field'
 
 // Cada peça é apresentada dentro de um "quadro de ferramenta" (.shadow-board):
 // o contorno tracejado atrás mostra "aqui é o lugar dela", como um pegboard
@@ -130,16 +163,64 @@ function ShowcaseBody() {
   const [view, setView] = useState<'lista' | 'grade' | 'mapa'>('grade')
   const [gain, setGain] = useState(42)
   const [tags, setTags] = useState(['produção', 'latência', 'ssd'])
+  const [search, setSearch] = useState('')
+  const [replicas, setReplicas] = useState(3)
+  const [plan, setPlan] = useState('pro')
+  const [nav, setNav] = useState('painel')
 
   return (
     <div className="min-h-screen bg-ink px-10 py-12">
-      <header className="mb-16">
-        <p className="font-mono text-xs uppercase tracking-widest text-brass-dim">Catálogo de instrumentos</p>
-        <h1 className="font-display text-4xl text-vellum">Vernier</h1>
-        <p className="mt-2 max-w-lg text-sm text-vellum-muted">
-          Biblioteca pessoal de componentes React — cada peça tem seu lugar, como numa bancada de instrumentista.
-        </p>
+      <header className="mb-16 max-w-3xl">
+        <Overline>Catálogo de instrumentos</Overline>
+        <Display className="mt-3">Vernier</Display>
+        <Lead className="mt-4">
+          Biblioteca pessoal de componentes React — tipografia de site, peças de formulário,
+          navegação e painéis, todos no mesmo metal.
+        </Lead>
       </header>
+
+      <Plate number="00" title="Tipografia">
+        <Stack gap="lg" className="w-full max-w-2xl">
+          <div>
+            <Overline>Overline · Space Mono</Overline>
+            <Display size="sm" className="mt-2">
+              Display em Fraunces
+            </Display>
+            <Lead className="mt-3">
+              Lead: o parágrafo que abre a página — largo, respirado, com tracking negativo suave.
+            </Lead>
+          </div>
+          <div className="space-y-2">
+            <Heading level={1}>Heading 1 — precisão tipográfica</Heading>
+            <Heading level={2}>Heading 2 — hierarquia clara</Heading>
+            <Heading level={3}>Heading 3 — seção</Heading>
+            <Heading level={4}>Heading 4 — subtítulo</Heading>
+          </div>
+          <Text>
+            Body: texto corrido com measure limitado (~65ch), line-height generoso e kerning ligado.
+            Use <InlineCode>InlineCode</InlineCode> pra tokens e APIs.
+          </Text>
+          <Text size="sm" tone="muted">
+            Body sm — legendas densas, helpers de formulário, metadados secundários.
+          </Text>
+          <Caption>Caption — rodapé, timestamps, notas de calibração.</Caption>
+          <Blockquote cite="Manual do instrumentista">
+            Cada peça tem seu lugar na bancada. Tipografia também.
+          </Blockquote>
+          <Prose>
+            <h2>Prose</h2>
+            <p>
+              Bloco editorial com estilos herdados pra conteúdo longo — docs, changelogs, runbooks.
+              Links em <Link href="#">latão</Link>, listas e ênfase já calibrados.
+            </p>
+            <ul>
+              <li>Fraunces no display (optical size)</li>
+              <li>General Sans no corpo</li>
+              <li>Space Mono nos dados</li>
+            </ul>
+          </Prose>
+        </Stack>
+      </Plate>
 
       <Plate number="01" title="Botão">
         <Button>Ação primária</Button>
@@ -562,6 +643,198 @@ function ShowcaseBody() {
             </div>
           </div>
         </InstrumentCard>
+      </Plate>
+
+      <Plate number="34" title="Busca & Senha">
+        <SearchInput
+          className="w-72"
+          placeholder="Buscar servidores…"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onClear={() => setSearch('')}
+        />
+        <PasswordInput className="w-72" label="Senha" hint="Mínimo 12 caracteres" />
+      </Plate>
+
+      <Plate number="35" title="Número & Rádio">
+        <NumberField label="Réplicas" value={replicas} onChange={setReplicas} min={1} max={12} />
+        <RadioGroup value={plan} onValueChange={setPlan} className="flex flex-col gap-2">
+          <RadioGroupItem value="starter" id="starter" label="Starter" />
+          <RadioGroupItem value="pro" id="pro" label="Pro" />
+          <RadioGroupItem value="scale" id="scale" label="Scale" />
+        </RadioGroup>
+      </Plate>
+
+      <Plate number="36" title="Accordion">
+        <Accordion type="single" collapsible className="w-96">
+          <AccordionItem value="a">
+            <AccordionTrigger>O que é a Vernier?</AccordionTrigger>
+            <AccordionContent>
+              Biblioteca pessoal de UI com identidade de bancada — latão, madeira e tipografia calibrada.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="b">
+            <AccordionTrigger>Como instalar num app?</AccordionTrigger>
+            <AccordionContent>
+              Copie `components/`, `lib/cn.ts` e mescle o `tailwind.config.js` — modelo shadcn.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </Plate>
+
+      <Plate number="37" title="Collapsible & Popover">
+        <Collapsible className="w-72">
+          <CollapsibleTrigger asChild>
+            <Button variant="secondary">
+              Detalhes <ChevronDown className="h-4 w-4" />
+            </Button>
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <p className="mt-3 text-sm text-vellum-muted">Conteúdo recolhível pra painéis densos.</p>
+          </CollapsibleContent>
+        </Collapsible>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="forged">Abrir popover</Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <p className="font-display text-sm text-vellum">Calibração</p>
+            <p className="mt-1 text-xs text-vellum-muted">Ajuste fino sem sair da página.</p>
+          </PopoverContent>
+        </Popover>
+      </Plate>
+
+      <Plate number="38" title="Sheet">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="gradient">Abrir painel lateral</Button>
+          </SheetTrigger>
+          <SheetContent side="right">
+            <SheetTitle>Configuração do nó</SheetTitle>
+            <SheetDescription>Parâmetros de web-01 sem sair do contexto.</SheetDescription>
+            <div className="mt-6 space-y-4">
+              <Input label="Hostname" defaultValue="web-01" />
+              <Button variant="gradient" className="w-full">
+                Salvar
+              </Button>
+            </div>
+          </SheetContent>
+        </Sheet>
+      </Plate>
+
+      <Plate number="39" title="Spinner & Banner">
+        <Spinner size="lg" />
+        <Banner
+          className="w-full max-w-xl"
+          tone="brass"
+          action={
+            <Button size="sm" variant="forged">
+              Ver
+            </Button>
+          }
+        >
+          Nova versão 0.2 disponível na bancada.
+        </Banner>
+      </Plate>
+
+      <Plate number="40" title="Dropzone & Stepper">
+        <FileDropzone
+          className="w-80"
+          onFiles={(files) => console.log(files)}
+          label="Solte o manifesto"
+          hint="YAML ou JSON · até 5 MB"
+        />
+        <Stepper
+          className="w-full max-w-lg"
+          current={1}
+          steps={[
+            { title: 'Conectar', description: 'SSH / API' },
+            { title: 'Calibrar', description: 'Healthchecks' },
+            { title: 'Publicar', description: 'Go live' },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="41" title="Navbar">
+        <div className="w-full max-w-3xl overflow-hidden rounded-lg border border-line">
+          <Navbar
+            brand={
+              <>
+                <GaugeIcon className="h-4 w-4 text-brass" /> Vernier
+              </>
+            }
+            links={
+              <>
+                <NavLink active={nav === 'painel'} onClick={() => setNav('painel')}>
+                  Painel
+                </NavLink>
+                <NavLink active={nav === 'logs'} onClick={() => setNav('logs')}>
+                  Logs
+                </NavLink>
+                <NavLink active={nav === 'billing'} onClick={() => setNav('billing')}>
+                  Billing
+                </NavLink>
+              </>
+            }
+            actions={
+              <>
+                <Button size="sm" variant="ghost">
+                  Docs
+                </Button>
+                <Button size="sm" variant="gradient">
+                  Deploy
+                </Button>
+              </>
+            }
+          />
+        </div>
+      </Plate>
+
+      <Plate number="42" title="Código & Hover">
+        <CodeBlock className="w-full max-w-xl" language="bash" code={`npm run dev\n# vitrine em localhost:5174`} />
+        <div className="flex items-center gap-3">
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button variant="ghost">@eduardo</Button>
+            </HoverCardTrigger>
+            <HoverCardContent>
+              <div className="flex gap-3">
+                <Avatar fallback="Eduardo" />
+                <div>
+                  <p className="font-medium text-vellum">Eduardo</p>
+                  <p className="text-xs text-vellum-muted">Instrumentista · Vernier</p>
+                </div>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+          <CopyButton value="npm i vernier" />
+        </div>
+      </Plate>
+
+      <Plate number="43" title="Scroll & Aspect">
+        <ScrollArea className="h-40 w-64 rounded-lg border border-line bg-panel p-3">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <p key={i} className="py-1.5 text-sm text-vellum-muted border-b border-line/60 last:border-0">
+              Evento #{i + 1} · health ok
+            </p>
+          ))}
+        </ScrollArea>
+        <AspectRatio ratio={16 / 9} className="w-72 rounded-lg border border-line bg-panel2">
+          <div className="flex h-full items-center justify-center font-mono text-xs text-brass-dim">
+            16:9 · mídia
+          </div>
+        </AspectRatio>
+      </Plate>
+
+      <Plate number="44" title="Fieldset">
+        <Fieldset legend="credenciais" className="w-80">
+          <Field label="Usuário" hint="sem espaços">
+            <Input defaultValue="deploy" />
+          </Field>
+          <Field label="Token" error="Token expirado">
+            <Input defaultValue="••••••••" />
+          </Field>
+        </Fieldset>
       </Plate>
     </div>
   )
