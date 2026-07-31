@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+mcp/node_modules/
+
+# Build
+dist/
+mcp/dist/
+*.tsbuildinfo
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Logs & debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+*.swo
+
+# Tooling leftovers
+.playwright-mcp/
+.turbo/
+.cache/
+coverage/
+*.local
+
+# Nested / leftover clones (not part of Vernier)
+lib_componentes/

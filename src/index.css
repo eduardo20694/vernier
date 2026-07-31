@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3A342C transparent;
+}
+
+body {
+  font-feature-settings: "tnum" 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid #C9A66B;
+  outline-offset: 2px;
+}
+
+/*
+ * .shadow-board é o elemento-assinatura da Vernier: o contorno gravado
+ * atrás de cada componente na página de showcase, como o desenho de
+ * silhueta num quadro de ferramentas de oficina — mostra "aqui é o lugar
+ * desta peça". Usado só na vitrine, nunca dentro dos componentes em uso
+ * real, pra não virar decoração barata.
+ */
+.shadow-board {
+  position: relative;
+}
+.shadow-board::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 1px dashed #3A342C;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+/* Polegar de latão do Slider — WebKit + Firefox */
+.vernier-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  margin-top: -5px;
+  border-radius: 9999px;
+  border: 1px solid #E0C08A;
+  background: linear-gradient(180deg, #E0C08A 0%, #C9A66B 45%, #8A7047 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 240, 210, 0.45),
+    0 0 0 3px rgba(27, 24, 21, 0.9),
+    0 0 12px rgba(201, 166, 107, 0.45);
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.vernier-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #2C2822, #3A342C, #2C2822);
+  border: 1px solid #3A342C;
+}
+.vernier-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 240, 210, 0.55),
+    0 0 0 3px rgba(27, 24, 21, 0.9),
+    0 0 18px rgba(224, 192, 138, 0.6);
+}
+.vernier-slider::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 9999px;
+  border: 1px solid #E0C08A;
+  background: linear-gradient(180deg, #E0C08A 0%, #C9A66B 45%, #8A7047 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 240, 210, 0.45),
+    0 0 0 3px rgba(27, 24, 21, 0.9),
+    0 0 12px rgba(201, 166, 107, 0.45);
+  cursor: pointer;
+}
+.vernier-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #2C2822, #3A342C, #2C2822);
+  border: 1px solid #3A342C;
+}
