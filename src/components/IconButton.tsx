@@ -21,7 +21,7 @@ const toneClasses: Record<Tone, string> = {
   neutral:
     'border-line bg-gradient-to-b from-panel2 to-panel text-vellum-muted hover:text-vellum hover:border-brass-dim/60',
   brass:
-    'border-brass-dim/70 bg-gradient-to-b from-brass/20 to-brass/5 text-brass-bright hover:from-brass/30 hover:border-brass shadow-[0_0_16px_-6px_rgba(201,166,107,0.45)]',
+    'border-brass-dim/70 bg-gradient-to-b from-brass/20 to-brass/5 text-brass-bright hover:from-brass/30 hover:border-brass shadow-[0_0_16px_-6px_rgb(var(--brass)/0.45)]',
   verdigris:
     'border-verdigris-dim/70 bg-gradient-to-b from-verdigris/20 to-verdigris/5 text-verdigris hover:from-verdigris/30 hover:border-verdigris',
   rust:

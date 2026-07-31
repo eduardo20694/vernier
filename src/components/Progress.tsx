@@ -12,7 +12,7 @@ export interface ProgressProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 // Barra de medição — o instrumento mais literal da Vernier. Valor numérico
-// em Space Mono, trilha em madeira/painel, preenchimento em brass.
+// em Space Mono, trilha em painel aço, preenchimento em brass (azure).
 export function Progress({
   className,
   value = 0,

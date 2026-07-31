@@ -30,9 +30,8 @@ export function TableHead({ className, numeric, ...props }: ThHTMLAttributes<HTM
   )
 }
 
-// numeric=true alinha o dado à direita e usa a mono — a mesma convenção
-// contábil que já usamos no Rowkeeper, mantida aqui porque é uma regra
-// universal de legibilidade de número em tabela, não um capricho estético.
+// numeric=true alinha o dado à direita e usa a mono — convenção universal
+// de legibilidade de número em tabela, não um capricho estético.
 export function TableCell({ className, numeric, ...props }: TdHTMLAttributes<HTMLTableCellElement> & { numeric?: boolean }) {
   return (
     <td

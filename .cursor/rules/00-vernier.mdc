@@ -1,0 +1,40 @@
+---
+description: Vernier is a React component library / design system — not a Go API
+alwaysApply: true
+---
+
+# Vernier — Architect Context
+
+This repository is **Vernier**: a personal **React + TypeScript + Vite** component library and interactive showcase (precision instrument / deep ocean steel: navy ink, blue-slate panels, luminous azure accent, day + night modes).
+
+## What this project is
+
+- `src/components/` — reusable UI components (Radix + Tailwind)
+- `src/tokens.json` — design tokens (+ documented day/night palettes)
+- `src/index.css` — CSS variables for `.dark` / `.light` (Tailwind colors flip via vars)
+- `src/showcase/` — catalog vitrine (`npm run dev`, port 5174) with theme toggle
+- `mcp/` — MCP server to list/read/install components into other projects
+- Distribution: copy components (shadcn-style) or MCP `install_component` — not a published npm package
+
+## What this project is NOT
+
+- Not a Go REST API, not multi-role `APP_ROLE`, not Docker/nginx dual deploy
+- Standalone library — no sibling product brands in copy or demos
+- Ignore any parent-workspace rules that describe `cmd/api`, `internal/`, migrations, or financial API integrations — they do not apply here
+
+## Conventions
+
+- Portuguese (Brazil) for README and showcase copy unless asked otherwise
+- Keep the Vernier visual identity (blue ocean steel); do not rebrand to purple SaaS, cream/terracotta clichés, or warm brass/wood/gold
+- Tailwind color **keys** stay (`ink`, `panel`, `brass`, `verdigris`, `rust`, `vellum`) — values come from CSS variables
+- Handlers/services/repositories layers do not exist — this is frontend library code only
+
+## Delegation (when implementing)
+
+| Ask | Owner |
+|-----|--------|
+| Components, hooks, showcase demos | react-frontend |
+| Atmosphere, layout, catalog chrome, “more beautiful” | ui-dashboard |
+| Deep codebase research | research |
+| Tests | testing |
+| Verify build/dev | verifier |

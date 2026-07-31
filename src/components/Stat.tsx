@@ -24,8 +24,8 @@ export function Stat({ label, value, hint, delta, deltaTone = 'flat', icon, clas
     <div
       className={cn(
         'relative min-w-[140px] overflow-hidden rounded-lg border border-line',
-        'bg-gradient-to-b from-panel2 via-panel to-[#1E1B17]',
-        'shadow-[inset_0_1px_0_rgba(201,166,107,0.08),0_1px_0_rgba(0,0,0,0.35)]',
+        'bg-gradient-to-b from-panel2 via-panel to-ink',
+        'shadow-[inset_0_1px_0_rgb(var(--brass)/0.1),0_1px_0_rgb(var(--shade)/0.25)]',
         'px-4 py-3.5',
         className
       )}

@@ -71,7 +71,7 @@ export function SidebarNav({
                       'flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors focus-ring',
                       collapsed && 'justify-center px-0',
                       active
-                        ? 'bg-panel2 text-brass-bright shadow-[inset_2px_0_0_0_#C9A66B]'
+                        ? 'bg-panel2 text-brass-bright shadow-[inset_2px_0_0_0_rgb(var(--brass))]'
                         : 'text-vellum-muted hover:bg-panel2/70 hover:text-vellum'
                     )}
                   >

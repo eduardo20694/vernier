@@ -5,7 +5,9 @@ import {
   Bold,
   Box,
   ChevronDown,
+  File,
   FileText,
+  Folder,
   Gauge as GaugeIcon,
   Italic,
   Layers,
@@ -16,7 +18,7 @@ import {
   Server,
   Settings,
   Sparkles,
-  Terminal,
+  Terminal as TerminalIcon,
 } from 'lucide-react'
 import { Button } from '../components/Button'
 import { IconButton } from '../components/IconButton'
@@ -101,11 +103,24 @@ import { Timeline } from '../components/Timeline'
 import {
   Display,
   Heading,
+  Subtitle,
   Lead,
   Text,
   Caption,
   Overline,
+  Small,
+  Strong,
+  Em,
+  Mark,
   InlineCode,
+  Mono,
+  GradientText,
+  Truncate,
+  LineClamp,
+  Balance,
+  List,
+  OrderedList,
+  DefinitionList,
   Prose,
 } from '../components/Typography'
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../components/Accordion'
@@ -132,6 +147,7 @@ import { MobileNav } from '../components/MobileNav'
 import { Wizard } from '../components/Wizard'
 import { Combobox } from '../components/Combobox'
 import { Calendar } from '../components/Calendar'
+import { DatePicker } from '../components/DatePicker'
 import { DataTable } from '../components/DataTable'
 import {
   MenubarMenu,
@@ -145,7 +161,225 @@ import {
 import { OtpInput } from '../components/OtpInput'
 import { Toggle, ToggleGroupItem, ToggleGroupBar } from '../components/ToggleGroup'
 import { Carousel } from '../components/Carousel'
+import { Testimonial, TestimonialGrid } from '../components/Testimonial'
+import { LogoCloud } from '../components/LogoCloud'
+import { Newsletter } from '../components/Newsletter'
+import { BlogArticle } from '../components/BlogArticle'
+import { Gallery } from '../components/Gallery'
+import { VideoEmbed } from '../components/VideoEmbed'
+import { StickyCTA } from '../components/StickyCTA'
+import {
+  NavigationMenuBar,
+  NavigationMenuListBar,
+  NavigationMenuItem,
+  NavigationMenuTriggerBtn,
+  NavigationMenuContentPanel,
+  NavigationMenuLinkItem,
+} from '../components/NavigationMenu'
+import {
+  AreaChartCard,
+  BarChartCard,
+  ChartCardShell,
+  ComboChartCard,
+  DonutChartCard,
+  FunnelChartCard,
+  RadarChartCard,
+  Sparkline,
+  CHART_COLORS,
+} from '../components/Charts'
+import { TreeView, type TreeNode } from '../components/TreeView'
+import { ColorPicker } from '../components/ColorPicker'
+import { TagInput } from '../components/TagInput'
+import { MultiSelect } from '../components/MultiSelect'
+import { DateRangePicker, type DateRange } from '../components/DateRangePicker'
+import { TimePicker } from '../components/TimePicker'
+import { MaskedInput } from '../components/MaskedInput'
+import { CurrencyInput } from '../components/CurrencyInput'
+import { Rating } from '../components/Rating'
+import { Kanban, type KanbanColumn } from '../components/Kanban'
+import { NotificationCenter, type NotificationItem } from '../components/NotificationCenter'
+import { FilterBar, type ActiveFilter } from '../components/FilterBar'
+import { ActivityFeed } from '../components/ActivityFeed'
+import { ChatThread, type ChatMessage } from '../components/ChatThread'
+import { UserMenu } from '../components/UserMenu'
+import { FAQ } from '../components/FAQ'
+import { FeatureBento } from '../components/FeatureBento'
+import { ComparisonTable } from '../components/ComparisonTable'
+import { SectionCTA } from '../components/SectionCTA'
+import { AnnouncementBar } from '../components/AnnouncementBar'
+import { TeamGrid } from '../components/TeamGrid'
+import { Changelog } from '../components/Changelog'
+import { RichTextEditor } from '../components/RichTextEditor'
 import { CatalogShell, Plate } from './CatalogShell'
+import { Plates99to152 } from './Plates99to152'
+
+const MONTHLY_CHART = [
+  { mes: 'Jan', leituras: 42, alertas: 8, meta: 50 },
+  { mes: 'Fev', leituras: 55, alertas: 6, meta: 52 },
+  { mes: 'Mar', leituras: 48, alertas: 11, meta: 54 },
+  { mes: 'Abr', leituras: 67, alertas: 5, meta: 56 },
+  { mes: 'Mai', leituras: 72, alertas: 4, meta: 58 },
+  { mes: 'Jun', leituras: 61, alertas: 7, meta: 60 },
+  { mes: 'Jul', leituras: 78, alertas: 3, meta: 62 },
+  { mes: 'Ago', leituras: 84, alertas: 5, meta: 64 },
+  { mes: 'Set', leituras: 91, alertas: 4, meta: 66 },
+  { mes: 'Out', leituras: 88, alertas: 6, meta: 68 },
+  { mes: 'Nov', leituras: 96, alertas: 3, meta: 70 },
+  { mes: 'Dez', leituras: 102, alertas: 2, meta: 72 },
+]
+
+const CHART_SERIES = [
+  { key: 'leituras', label: 'Leituras', color: CHART_COLORS.azureBright },
+  { key: 'alertas', label: 'Alertas', color: CHART_COLORS.verdigris },
+]
+
+const DONUT_SLICES = [
+  { key: 'ok', label: 'Estável', value: 68, color: CHART_COLORS.azureBright },
+  { key: 'attn', label: 'Atenção', value: 22, color: CHART_COLORS.verdigris },
+  { key: 'crit', label: 'Crítico', value: 10, color: CHART_COLORS.rust },
+]
+
+const FUNNEL_STAGES = [
+  { key: 'cap', label: 'Captura', value: 1240, color: CHART_COLORS.azureBright },
+  { key: 'cal', label: 'Calibração', value: 890, color: CHART_COLORS.azure },
+  { key: 'val', label: 'Validação', value: 610, color: CHART_COLORS.verdigris },
+  { key: 'pub', label: 'Publicação', value: 420, color: CHART_COLORS.azureDim },
+]
+
+const RADAR_DATA = [
+  { eixo: 'Precisão', atual: 92, alvo: 88 },
+  { eixo: 'Latência', atual: 78, alvo: 85 },
+  { eixo: 'Cobertura', atual: 86, alvo: 80 },
+  { eixo: 'Estabilidade', atual: 90, alvo: 90 },
+  { eixo: 'Ruído', atual: 72, alvo: 75 },
+]
+
+const SPARK_A = MONTHLY_CHART.map(({ mes, leituras }) => ({ mes, v: leituras }))
+const SPARK_B = MONTHLY_CHART.map(({ mes, alertas }) => ({ mes, v: alertas }))
+const SPARK_C = MONTHLY_CHART.map(({ mes, meta }) => ({ mes, v: meta }))
+
+const FILE_TREE: TreeNode[] = [
+  {
+    id: 'src',
+    label: 'src',
+    icon: <Folder className="h-3.5 w-3.5 text-brass-bright" />,
+    children: [
+      {
+        id: 'components',
+        label: 'components',
+        icon: <Folder className="h-3.5 w-3.5 text-brass-bright" />,
+        children: [
+          {
+            id: 'button',
+            label: 'Button.tsx',
+            icon: <File className="h-3.5 w-3.5 text-vellum-muted" />,
+          },
+          {
+            id: 'charts',
+            label: 'Charts.tsx',
+            icon: <File className="h-3.5 w-3.5 text-vellum-muted" />,
+          },
+        ],
+      },
+      {
+        id: 'tokens',
+        label: 'tokens.json',
+        icon: <File className="h-3.5 w-3.5 text-vellum-muted" />,
+      },
+    ],
+  },
+  {
+    id: 'mcp',
+    label: 'mcp',
+    icon: <Folder className="h-3.5 w-3.5 text-brass-bright" />,
+    children: [
+      {
+        id: 'manifest',
+        label: 'manifest.ts',
+        icon: <File className="h-3.5 w-3.5 text-vellum-muted" />,
+      },
+    ],
+  },
+]
+
+const MULTI_OPTS = [
+  { value: 'sa-east-1', label: 'São Paulo' },
+  { value: 'us-east-1', label: 'N. Virginia' },
+  { value: 'eu-west-1', label: 'Irlanda' },
+  { value: 'ap-south-1', label: 'Mumbai' },
+]
+
+const INITIAL_KANBAN: KanbanColumn[] = [
+  {
+    id: 'backlog',
+    title: 'Backlog',
+    cards: [
+      { id: 'k1', title: 'Calibrar Gauge', description: 'Ajuste de arco 270°', tone: 'brass' },
+      { id: 'k2', title: 'Tokens dia/noite', description: 'Revisar contraste', tone: 'neutral' },
+    ],
+  },
+  {
+    id: 'andamento',
+    title: 'Em andamento',
+    cards: [
+      { id: 'k3', title: 'Kanban na vitrine', description: 'Demo com 3 colunas', tone: 'verdigris' },
+    ],
+  },
+  {
+    id: 'feito',
+    title: 'Feito',
+    cards: [
+      { id: 'k4', title: 'Charts plate 75', description: 'Redesign instrumental', tone: 'verdigris' },
+    ],
+  },
+]
+
+const INITIAL_NOTIFS: NotificationItem[] = [
+  {
+    id: 'n1',
+    title: 'Deploy concluído',
+    description: 'vernier@latest publicado na vitrine.',
+    time: 'há 2 min',
+    unread: true,
+  },
+  {
+    id: 'n2',
+    title: 'Calibração agendada',
+    description: 'Manômetro #22 às 14:00.',
+    time: 'há 1 h',
+    unread: true,
+  },
+  {
+    id: 'n3',
+    title: 'Backup noturno',
+    description: 'Snapshot gravado com sucesso.',
+    time: 'ontem',
+    unread: false,
+  },
+]
+
+const INITIAL_CHAT: ChatMessage[] = [
+  {
+    id: 'c1',
+    from: 'them',
+    author: 'Lia',
+    body: 'A placa 75 dos Charts ficou impecável.',
+    time: '09:12',
+  },
+  {
+    id: 'c2',
+    from: 'me',
+    body: 'Valeu — agora vamos plugar as 21 peças novas.',
+    time: '09:14',
+  },
+  {
+    id: 'c3',
+    from: 'them',
+    author: 'Lia',
+    body: 'Kanban com três colunas e FAQ em PT-BR, combinado?',
+    time: '09:15',
+  },
+]
 
 function ToastDemo() {
   const { toast } = useToast()
@@ -208,31 +442,96 @@ function ShowcaseBody() {
   const [topSearch, setTopSearch] = useState('')
   const [combo, setCombo] = useState('sa-east-1')
   const [date, setDate] = useState<Date | undefined>(new Date())
+  const [pickedDate, setPickedDate] = useState<Date | undefined>()
   const [otp, setOtp] = useState('')
   const [align, setAlign] = useState('left')
   const [showCookie, setShowCookie] = useState(false)
+  const [showSticky, setShowSticky] = useState(false)
+  const [stickyKey, setStickyKey] = useState(0)
+  const [treeSelected, setTreeSelected] = useState('charts')
+  const [accentColor, setAccentColor] = useState('#3E8AE8')
+  const [inputTags, setInputTags] = useState(['produção', 'azure', 'vitrine'])
+  const [multiRegions, setMultiRegions] = useState(['sa-east-1', 'eu-west-1'])
+  const [dateRange, setDateRange] = useState<DateRange>({
+    from: new Date(2026, 6, 1),
+    to: new Date(2026, 6, 31),
+  })
+  const [timeValue, setTimeValue] = useState('14:30')
+  const [phone, setPhone] = useState('11987654321')
+  const [cpf, setCpf] = useState('52998224725')
+  const [amount, setAmount] = useState<number | null>(1290.5)
+  const [rating, setRating] = useState(4)
+  const [kanbanCols, setKanbanCols] = useState(INITIAL_KANBAN)
+  const [notifs, setNotifs] = useState(INITIAL_NOTIFS)
+  const [activeFilters, setActiveFilters] = useState<ActiveFilter[]>([
+    { id: 'reg', label: 'Região: SP', tone: 'brass' },
+    { id: 'st', label: 'Status: ativo', tone: 'verdigris' },
+  ])
+  const [chatMsgs, setChatMsgs] = useState(INITIAL_CHAT)
+  const [showAnnounce, setShowAnnounce] = useState(false)
+  const [announceKey, setAnnounceKey] = useState(0)
+  const [richHtml, setRichHtml] = useState(
+    '<p>Calibre o <strong>instrumento</strong> e publique a nota.</p>'
+  )
 
   return (
     <>
-      <section id="topo" className="relative mb-14 overflow-hidden rounded-2xl border border-line bg-panel p-8 sm:p-12 shadow-plate">
+      <section
+        id="topo"
+        className="topo-hero relative mb-16 -mx-5 overflow-hidden border-y border-line/70 sm:-mx-8 lg:-mx-10"
+      >
+        <div aria-hidden className="pointer-events-none absolute inset-0 topo-metal" />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-line to-transparent"
+          className="pointer-events-none absolute -right-20 -top-32 h-[28rem] w-[28rem] rounded-full bg-brass/[0.12] blur-3xl topo-bloom"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-28 -left-16 h-72 w-72 rounded-full bg-verdigris/[0.08] blur-3xl topo-sweep"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brass/45 to-transparent"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-line/80 to-transparent"
         />
 
-        <div className="relative max-w-2xl">
-          <Overline>Catálogo de instrumentos</Overline>
-          <Display className="mt-3">Vernier</Display>
-          <Lead className="mt-5">
-            Cada peça no seu lugar — tipografia de site, formulários, overlays e instrumentos
-            de painel. Use a busca ou os filtros do header pra achar qualquer prancha.
+        {/* Gauge como atmosfera — plano, não adesivo */}
+        <div
+          aria-hidden
+          className="topo-gauge-atmosphere pointer-events-none absolute -right-6 bottom-[-10%] hidden md:block lg:right-[8%] lg:bottom-[-6%]"
+        >
+          <Gauge value={68} size="lg" tone="brass" />
+        </div>
+
+        <div className="relative z-[2] mx-auto flex min-h-[min(72vh,560px)] max-w-[1400px] flex-col justify-end px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+          <Display className="vernier-mark text-[clamp(3.5rem,12vw,7.5rem)] leading-[0.88]">
+            Vernier
+          </Display>
+          <Lead className="mt-5 max-w-md text-vellum-muted">
+            Peças de precisão pra React — no aço oceano.
           </Lead>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button variant="secondary" size="sm" onClick={() => document.getElementById('catalog-search')?.focus()}>
-              <Search className="h-3.5 w-3.5" />
-              Filtrar peças
+            <Button
+              variant="glow"
+              size="lg"
+              onClick={() => document.getElementById('catalog-search')?.focus()}
+            >
+              <Search className="h-4 w-4" />
+              Abrir o catálogo
             </Button>
-            <Caption className="m-0">ou pressione <Kbd className="mx-1">/</Kbd> em qualquer lugar</Caption>
+            <Button
+              variant="forged"
+              size="lg"
+              onClick={() => document.getElementById('plate-00')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Ver tipografia
+            </Button>
+            <Caption className="m-0 w-full text-vellum-faint sm:ml-1 sm:w-auto">
+              <Kbd className="mx-0.5">/</Kbd> pra filtrar
+            </Caption>
           </div>
         </div>
       </section>
@@ -240,37 +539,117 @@ function ShowcaseBody() {
       <Plate number="00" title="Tipografia">
         <Stack gap="lg" className="w-full max-w-2xl">
           <div>
-            <Overline tone="brass">Overline · Space Mono</Overline>
-            <Display size="sm" className="mt-2">
-              Display em Fraunces
-            </Display>
-            <Lead className="mt-3">
+            <Overline tone="brass">Hierarquia</Overline>
+            <Balance as="div">
+              <Display size="sm" className="mt-2">
+                Display em <GradientText>Fraunces</GradientText>
+              </Display>
+            </Balance>
+            <Subtitle className="mt-3">
+              Subtitle — entre o título e o lead, mais contido que o parágrafo de abertura.
+            </Subtitle>
+            <Lead className="mt-2">
               Lead: o parágrafo que abre a página — largo, respirado, com tracking negativo suave.
             </Lead>
           </div>
+
           <div className="space-y-2">
             <Heading level={1}>Heading 1 — precisão tipográfica</Heading>
             <Heading level={2}>Heading 2 — hierarquia clara</Heading>
             <Heading level={3}>Heading 3 — seção</Heading>
             <Heading level={4}>Heading 4 — subtítulo</Heading>
+            <Heading level={5}>Heading 5 — detalhe</Heading>
+            <Heading level={6}>Heading 6 — mínimo display</Heading>
           </div>
-          <Text>
-            Body: texto corrido com measure limitado (~65ch), line-height generoso e kerning ligado.
-            Use <InlineCode>InlineCode</InlineCode> pra tokens e APIs.
-          </Text>
-          <Text size="sm" tone="muted">
-            Body sm — legendas densas, helpers de formulário, metadados secundários.
-          </Text>
-          <Caption>Caption — rodapé, timestamps, notas de calibração.</Caption>
+
+          <div className="space-y-2">
+            <Overline tone="brass">Corpo</Overline>
+            <Text size="lg">
+              Text lg — corpo largo, quase lead, pra trechos que pedem mais ar.
+            </Text>
+            <Text>
+              Text md: texto corrido com measure (~65ch). Use{' '}
+              <InlineCode>InlineCode</InlineCode> pra tokens e APIs.
+            </Text>
+            <Text size="sm" tone="muted">
+              Text sm — helpers de formulário, metadados secundários.
+            </Text>
+            <Text size="xs" tone="faint">
+              Text xs — corpo auxiliar adjacente à caption.
+            </Text>
+            <Caption>Caption — rodapé, timestamps, notas de calibração.</Caption>
+            <Text>
+              Também em <Small>Small</Small> — caption embutida no fluxo.
+            </Text>
+            <Text tone="verdigris">Tone verdigris — teal oceânico.</Text>
+            <Text tone="rust">Tone rust — alerta em vermelho frio.</Text>
+          </div>
+
+          <div className="space-y-2">
+            <Overline tone="brass">Inline</Overline>
+            <Text>
+              Ênfase com <Strong>Strong</Strong>, <Em>Em</Em> e destaque em{' '}
+              <Mark>Mark</Mark> — wash azure, sem neon.
+            </Text>
+          </div>
+
+          <div className="space-y-2">
+            <Overline tone="brass">Mono + gradiente</Overline>
+            <Text>
+              IDs e números em <Mono>vrn-04a2</Mono> · <Mono size="md" tone="muted">128.0</Mono>
+            </Text>
+            <Heading level={3}>
+              <GradientText>GradientText</GradientText> — metal azure no título
+            </Heading>
+          </div>
+
+          <div className="space-y-3">
+            <Overline tone="brass">Listas</Overline>
+            <List>
+              <li>Fraunces no display</li>
+              <li>General Sans no corpo</li>
+              <li>Space Mono nos dados</li>
+            </List>
+            <OrderedList>
+              <li>Calibrar escala</li>
+              <li>Marcar zero</li>
+              <li>Ler o vernier</li>
+            </OrderedList>
+            <DefinitionList>
+              <dt>passo</dt>
+              <dd>Menor divisão da escala principal.</dd>
+              <dt>nônio</dt>
+              <dd>Escala auxiliar que subdivisão a leitura.</dd>
+            </DefinitionList>
+          </div>
+
+          <div className="space-y-3">
+            <Overline tone="brass">Clamp</Overline>
+            <div className="max-w-xs rounded-md border border-line bg-panel2/60 px-3 py-2">
+              <Truncate>
+                Truncate: caminho longo demais pra caber numa linha — /bancada/instrumentos/vernier/calibração…
+              </Truncate>
+            </div>
+            <LineClamp lines={3} className="max-w-md text-body text-vellum-muted">
+              LineClamp (3 linhas): o instrumentista marca o zero, alinha a escala e lê o nônio
+              sob a luz fria do aço. Cada traço conta — azure, oceano e precisão guardam a medida
+              com a mesma clareza de um bom parágrafo tipográfico bem calibrado na vitrine.
+            </LineClamp>
+          </div>
+
           <Blockquote cite="Manual do instrumentista">
-            Cada peça tem seu lugar na bancada. Tipografia também.
+            Cada peça tem seu lugar no catálogo. Tipografia também.
           </Blockquote>
+
           <Prose>
             <h2>Prose</h2>
             <p>
               Bloco editorial com estilos herdados pra conteúdo longo — docs, changelogs, runbooks.
-              Links em <Link href="#">latão</Link>, listas e ênfase já calibrados.
+              Links em <Link href="#">azure</Link>, <code>code</code>, <mark>mark</mark> e ênfase
+              já calibrados.
             </p>
+            <blockquote>Prose também estiliza blockquote e o separador abaixo.</blockquote>
+            <hr />
             <ul>
               <li>Fraunces no display (optical size)</li>
               <li>General Sans no corpo</li>
@@ -292,15 +671,15 @@ function ShowcaseBody() {
       <Plate number="01b" title="Botões fundidos">
         <Button variant="gradient">
           <Sparkles className="h-4 w-4" />
-          Latão fundido
+          Azure fundido
         </Button>
         <Button variant="forged">
-          <Terminal className="h-4 w-4" />
+          <TerminalIcon className="h-4 w-4" />
           Gravado
         </Button>
         <Button variant="glow">
           <Play className="h-4 w-4" />
-          Aura de latão
+          Aura azure
         </Button>
         <Button variant="gradient" size="lg">
           Deploy agora
@@ -461,7 +840,7 @@ function ShowcaseBody() {
             brand={
               <>
                 <GaugeIcon className="h-4 w-4 text-brass" />
-                <span className="text-base">Dockwatch</span>
+                <span className="text-base">Vernier</span>
               </>
             }
             items={[
@@ -593,7 +972,7 @@ function ShowcaseBody() {
 
       <Plate number="26" title="Avatar">
         <Avatar fallback="Eduardo Silva" tone="brass" />
-        <Avatar fallback="Dock Watch" tone="verdigris" size="lg" />
+        <Avatar fallback="Vernier Lab" tone="verdigris" size="lg" />
         <Avatar fallback="RK" tone="rust" size="sm" ring={false} />
         <div className="flex -space-x-2">
           <Avatar fallback="Ana Costa" tone="brass" />
@@ -728,7 +1107,7 @@ function ShowcaseBody() {
           <AccordionItem value="a">
             <AccordionTrigger>O que é a Vernier?</AccordionTrigger>
             <AccordionContent>
-              Biblioteca pessoal de UI com identidade de bancada — latão, madeira e tipografia calibrada.
+              Biblioteca pessoal de UI com identidade de aço oceano — azure, navy e tipografia calibrada.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="b">
@@ -1025,7 +1404,7 @@ function ShowcaseBody() {
                 <>
                   <GaugeIcon className="h-4 w-4 shrink-0 text-brass-bright" />
                   <span data-sidebar-label className="truncate text-base">
-                    Dockwatch
+                    Vernier
                   </span>
                 </>
               }
@@ -1133,7 +1512,7 @@ function ShowcaseBody() {
         <Footer
           className="w-full max-w-4xl overflow-hidden rounded-xl"
           brand="Vernier"
-          tagline="Componentes de precisão pra Dockwatch, Rowkeeper e o que vier."
+          tagline="Componentes de precisão pra qualquer React."
           columns={[
             {
               title: 'Produto',
@@ -1167,17 +1546,28 @@ function ShowcaseBody() {
           eyebrow="Instrumentação visual"
           title={
             <>
-              A bancada pronta
+              O catálogo pronto
               <br />
               pro seu próximo painel
             </>
           }
-          description="Tipografia, forms, overlays e shells — tudo no mesmo metal, pronto pra copiar pro Dockwatch."
+          description="Tipografia, forms, overlays e shells — tudo no mesmo aço oceano, pronto pra copiar pro seu projeto."
           primaryAction={{ label: 'Ver catálogo' }}
           secondaryAction={{ label: 'GitHub' }}
           media={
-            <div className="flex h-full min-h-[220px] items-center justify-center rounded-xl border border-line bg-panel2/50">
-              <Gauge value={72} label="pronto" tone="brass" />
+            <div className="relative flex h-full min-h-[240px] items-center justify-center overflow-hidden rounded-xl border border-line bg-panel-recess">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(var(--brass)/0.14),transparent_65%)]"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-3 rounded-lg border border-dashed border-line/80"
+              />
+              <div className="relative grid grid-cols-2 gap-6 p-6">
+                <Gauge value={72} label="calibração" tone="brass" />
+                <Gauge value={48} label="oceano" tone="verdigris" />
+              </div>
             </div>
           }
         />
@@ -1354,9 +1744,9 @@ function ShowcaseBody() {
               id: '3',
               content: (
                 <div className="pb-10 text-center">
-                  <Heading level={3}>Pronto pro Dockwatch</Heading>
+                  <Heading level={3}>Pronto pra copiar</Heading>
                   <Text tone="muted" className="mx-auto mt-2">
-                    Copie as pranchas e siga a bancada.
+                    Leve as pranchas pro seu React e siga a bancada.
                   </Text>
                 </div>
               ),
@@ -1384,6 +1774,782 @@ function ShowcaseBody() {
       <Plate number="65" title="Wizard">
         <Wizard />
       </Plate>
+
+      <Plate number="66" title="Date picker">
+        <div className="flex w-full max-w-sm flex-col gap-4">
+          <DatePicker
+            label="Data de medição"
+            hint="Formato pt-BR"
+            value={pickedDate}
+            onChange={setPickedDate}
+            placeholder="Escolher data…"
+          />
+          <DatePicker
+            label="Com erro"
+            error="Informe uma data válida."
+            defaultValue={new Date()}
+          />
+          <DatePicker label="Desabilitado" disabled placeholder="Indisponível" />
+        </div>
+      </Plate>
+
+      <Plate number="67" title="Testimonial">
+        <TestimonialGrid className="w-full">
+          <Testimonial
+            quote="A Vernier deixou nosso painel com cara de instrumento de verdade — limpo, preciso, sem ruído visual."
+            author="Ana Ribeiro"
+            role="Design systems · Atlântico Lab"
+          />
+          <Testimonial
+            quote="Copiamos as pranchas e em um dia o site já falava a mesma língua visual do produto."
+            author="Diego Martins"
+            role="Frontend · Norte Escala"
+          />
+          <Testimonial
+            quote="Dia e noite calibrados. O acento azure corta o navy sem parecer SaaS genérico."
+            author="Camila Souza"
+            role="Product · Órbita"
+          />
+        </TestimonialGrid>
+      </Plate>
+
+      <Plate number="68" title="Logo cloud">
+        <LogoCloud
+          className="w-full py-4"
+          title="Calibrado em equipes que medem com rigor"
+          logos={[
+            { name: 'Atlântico Lab' },
+            { name: 'Norte Escala' },
+            { name: 'Órbita' },
+            { name: 'Meridiano' },
+            { name: 'Baía Tech' },
+            { name: 'Sextante' },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="69" title="Newsletter">
+        <Newsletter
+          className="w-full max-w-lg"
+          title="Boletim da bancada"
+          description="Novas pranchas, tokens e notas de calibração — uma vez por mês."
+          placeholder="voce@empresa.com"
+          submitLabel="Inscrever"
+          onSubmit={async () => {
+            await new Promise((r) => setTimeout(r, 400))
+          }}
+        />
+      </Plate>
+
+      <Plate number="70" title="Blog article">
+        <BlogArticle
+          className="w-full"
+          category="Calibração"
+          title="Como ler um painel sem perder o fio"
+          author="Equipe Vernier"
+          date="31 jul 2026"
+          readTime="4 min"
+          coverSrc="https://picsum.photos/seed/vernier-blog/960/540"
+          coverAlt="Painel com luz azul sobre metal"
+          toc={
+            <ul className="space-y-2 text-sm text-vellum-muted">
+              <li>
+                <a href="#topo" className="hover:text-brass-bright">
+                  Hierarquia
+                </a>
+              </li>
+              <li>
+                <a href="#topo" className="hover:text-brass-bright">
+                  Contraste
+                </a>
+              </li>
+            </ul>
+          }
+        >
+          <p>
+            Um bom instrumento não grita. Ele organiza escala, valor e estado para que o olho
+            encontre o que importa em poucos segundos.
+          </p>
+          <p>
+            Na Vernier, tipografia e painéis blue-slate trabalham juntos: o display marca o
+            título, o mono carrega metadados, e o azure aponta a ação.
+          </p>
+        </BlogArticle>
+      </Plate>
+
+      <Plate number="71" title="Gallery">
+        <Gallery
+          className="w-full"
+          columns={3}
+          items={[
+            {
+              src: 'https://picsum.photos/seed/vernier-g1/640/480',
+              alt: 'Bancada com instrumentos',
+              caption: 'Bancada',
+            },
+            {
+              src: 'https://picsum.photos/seed/vernier-g2/640/480',
+              alt: 'Detalhe de metal e azul',
+              caption: 'Metal',
+            },
+            {
+              src: 'https://picsum.photos/seed/vernier-g3/640/480',
+              alt: 'Painel noturno',
+              caption: 'Noite',
+            },
+            {
+              src: 'https://picsum.photos/seed/vernier-g4/640/480',
+              alt: 'Leitura em campo',
+              caption: 'Campo',
+            },
+            {
+              src: 'https://picsum.photos/seed/vernier-g5/640/480',
+              alt: 'Calibração',
+              caption: 'Calibração',
+            },
+            {
+              src: 'https://picsum.photos/seed/vernier-g6/640/480',
+              alt: 'Protótipo de UI',
+              caption: 'Protótipo',
+            },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="72" title="Video embed">
+        <VideoEmbed
+          className="w-full max-w-2xl"
+          title="Demonstração — Big Buck Bunny"
+          src="https://www.youtube.com/embed/aqz-KE-bpKQ"
+        />
+      </Plate>
+
+      <Plate number="73" title="Sticky CTA">
+        <Button
+          variant="secondary"
+          onClick={() => {
+            setStickyKey((k) => k + 1)
+            setShowSticky(true)
+          }}
+        >
+          Mostrar sticky CTA
+        </Button>
+        {showSticky && (
+          <StickyCTA
+            key={stickyKey}
+            message="Leve a Vernier pro seu próximo layout — copie a prancha e calibra."
+            actionLabel="Ver catálogo"
+            onAction={() => setShowSticky(false)}
+            onDismiss={() => setShowSticky(false)}
+          />
+        )}
+      </Plate>
+
+      <Plate number="74" title="Navigation menu">
+        <NavigationMenuBar>
+          <NavigationMenuListBar>
+            <NavigationMenuItem>
+              <NavigationMenuTriggerBtn>Produtos</NavigationMenuTriggerBtn>
+              <NavigationMenuContentPanel className="grid gap-2 p-3 md:w-[420px] md:grid-cols-2">
+                <NavigationMenuLinkItem href="#topo">
+                  <h3>Instrumentos</h3>
+                  <p>Gauge, Stat e cartões de medição.</p>
+                </NavigationMenuLinkItem>
+                <NavigationMenuLinkItem href="#topo">
+                  <h3>Formulários</h3>
+                  <p>Campos, OTP, wizard e date picker.</p>
+                </NavigationMenuLinkItem>
+                <NavigationMenuLinkItem href="#topo">
+                  <h3>Overlays</h3>
+                  <p>Dialog, sheet, command e context.</p>
+                </NavigationMenuLinkItem>
+                <NavigationMenuLinkItem href="#topo">
+                  <h3>Marketing</h3>
+                  <p>Hero, pricing, gallery e newsletter.</p>
+                </NavigationMenuLinkItem>
+              </NavigationMenuContentPanel>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuTriggerBtn>Recursos</NavigationMenuTriggerBtn>
+              <NavigationMenuContentPanel className="grid gap-2 p-3 md:w-[280px]">
+                <NavigationMenuLinkItem href="#topo">
+                  <h3>Tokens</h3>
+                  <p>Paleta dia/noite e tipografia.</p>
+                </NavigationMenuLinkItem>
+                <NavigationMenuLinkItem href="#topo">
+                  <h3>MCP</h3>
+                  <p>Instale componentes no destino.</p>
+                </NavigationMenuLinkItem>
+              </NavigationMenuContentPanel>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLinkItem href="#topo" className="border-0 px-3 py-2">
+                <h3 className="font-sans text-sm font-normal text-vellum-muted">Docs</h3>
+              </NavigationMenuLinkItem>
+            </NavigationMenuItem>
+          </NavigationMenuListBar>
+        </NavigationMenuBar>
+      </Plate>
+
+      <Plate number="75" title="Charts">
+        <div className="flex w-full flex-col gap-5">
+          <AreaChartCard
+            overline="Telemetria · 12 meses"
+            title="Leituras instrumentais"
+            description="Volume capturado vs. alertas calibrados — série sintética de vitrine."
+            delta="+18,4%"
+            deltaTone="up"
+            data={MONTHLY_CHART}
+            xKey="mes"
+            series={CHART_SERIES}
+            height={300}
+            showLegend
+          />
+
+          <div className="grid gap-5 lg:grid-cols-3">
+            <DonutChartCard
+              overline="Saúde"
+              title="Estado da frota"
+              delta="68% ok"
+              deltaTone="up"
+              data={DONUT_SLICES}
+              centerValue="68%"
+              centerCaption="estável"
+              height={220}
+            />
+            <ComboChartCard
+              overline="Combo"
+              title="Leituras × meta"
+              description="Barras + tendência."
+              data={MONTHLY_CHART}
+              xKey="mes"
+              series={[
+                { key: 'leituras', label: 'Leituras', color: CHART_COLORS.azureBright },
+                { key: 'meta', label: 'Meta', color: CHART_COLORS.verdigris },
+              ]}
+              barKeys={['leituras']}
+              lineKeys={['meta']}
+              height={220}
+            />
+            <BarChartCard
+              overline="Alertas"
+              title="Incidências"
+              delta="−42%"
+              deltaTone="up"
+              data={MONTHLY_CHART}
+              xKey="mes"
+              series={[{ key: 'alertas', label: 'Alertas', color: CHART_COLORS.verdigris }]}
+              height={220}
+              showLegend={false}
+            />
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-3">
+            {[
+              {
+                label: 'Throughput',
+                value: '102',
+                unit: 'leit./mês',
+                delta: '+12%',
+                tone: 'up' as const,
+                data: SPARK_A,
+                color: CHART_COLORS.azureBright,
+              },
+              {
+                label: 'Alertas',
+                value: '2',
+                unit: 'abertos',
+                delta: '−75%',
+                tone: 'up' as const,
+                data: SPARK_B,
+                color: CHART_COLORS.verdigris,
+              },
+              {
+                label: 'Meta',
+                value: '72',
+                unit: 'alvo',
+                delta: 'no eixo',
+                tone: 'neutral' as const,
+                data: SPARK_C,
+                color: CHART_COLORS.azure,
+              },
+            ].map((spark) => (
+              <ChartCardShell
+                key={spark.label}
+                overline="Sparkline"
+                title={spark.label}
+                delta={spark.delta}
+                deltaTone={spark.tone}
+              >
+                <div className="flex items-end justify-between gap-3 px-2 pb-1">
+                  <div>
+                    <p className="font-mono text-2xl tabular-nums text-vellum">{spark.value}</p>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-vellum-faint">
+                      {spark.unit}
+                    </p>
+                  </div>
+                  <Sparkline
+                    data={spark.data}
+                    dataKey="v"
+                    color={spark.color}
+                    height={44}
+                    className="max-w-[140px] flex-1"
+                  />
+                </div>
+              </ChartCardShell>
+            ))}
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-2">
+            <FunnelChartCard
+              overline="Pipeline"
+              title="Funil de calibração"
+              description="Da captura à publicação — retenção por estágio."
+              delta="33,9%"
+              deltaTone="neutral"
+              stages={FUNNEL_STAGES}
+            />
+            <RadarChartCard
+              overline="Radar"
+              title="Perfil do instrumento"
+              description="Atual vs. alvo em cinco eixos."
+              data={RADAR_DATA}
+              angleKey="eixo"
+              series={[
+                { key: 'atual', label: 'Atual', color: CHART_COLORS.azureBright },
+                { key: 'alvo', label: 'Alvo', color: CHART_COLORS.verdigris },
+              ]}
+              height={280}
+            />
+          </div>
+        </div>
+      </Plate>
+
+      <Plate number="76" title="Tree view">
+        <div className="w-full max-w-sm rounded-lg border border-line bg-panel p-3 shadow-plate">
+          <TreeView
+            nodes={FILE_TREE}
+            selectedId={treeSelected}
+            onSelect={setTreeSelected}
+            defaultExpandedIds={['src', 'components', 'mcp']}
+          />
+          <Caption className="mt-3">Selecionado: {treeSelected}</Caption>
+        </div>
+      </Plate>
+
+      <Plate number="77" title="Color picker">
+        <div className="flex w-full max-w-sm flex-col gap-4">
+          <ColorPicker
+            label="Acento do painel"
+            value={accentColor}
+            onChange={setAccentColor}
+          />
+          <div className="flex items-center gap-3">
+            <span
+              className="h-10 w-10 rounded-md border border-line shadow-plate"
+              style={{ backgroundColor: accentColor }}
+            />
+            <Caption>Valor atual: {accentColor}</Caption>
+          </div>
+        </div>
+      </Plate>
+
+      <Plate number="78" title="Tag input">
+        <TagInput
+          className="w-full max-w-md"
+          label="Tags do instrumento"
+          hint="Enter ou vírgula pra adicionar"
+          value={inputTags}
+          onChange={setInputTags}
+          placeholder="ex.: telemetria…"
+          maxTags={8}
+        />
+      </Plate>
+
+      <Plate number="79" title="Multi select">
+        <MultiSelect
+          className="w-full max-w-md"
+          label="Regiões ativas"
+          options={MULTI_OPTS}
+          value={multiRegions}
+          onChange={setMultiRegions}
+          placeholder="Escolher regiões…"
+          hint={`${multiRegions.length} selecionada(s)`}
+        />
+      </Plate>
+
+      <Plate number="80" title="Date range">
+        <DateRangePicker
+          className="w-full max-w-md"
+          label="Período de leitura"
+          value={dateRange}
+          onChange={setDateRange}
+          hint="Do primeiro ao último dia do intervalo"
+        />
+      </Plate>
+
+      <Plate number="81" title="Time picker">
+        <TimePicker
+          className="w-full max-w-xs"
+          label="Horário da calibração"
+          value={timeValue}
+          onChange={setTimeValue}
+          minuteStep={15}
+          hint="Passo de 15 minutos"
+        />
+      </Plate>
+
+      <Plate number="82" title="Masked input">
+        <div className="grid w-full max-w-lg gap-4 sm:grid-cols-2">
+          <MaskedInput
+            mask="telefone"
+            label="Telefone"
+            value={phone}
+            onChange={(v) => setPhone(v)}
+          />
+          <MaskedInput
+            mask="cpf"
+            label="CPF"
+            value={cpf}
+            onChange={(v) => setCpf(v)}
+          />
+          <MaskedInput mask="cnpj" label="CNPJ" defaultValue="11222333000181" />
+          <MaskedInput mask="cep" label="CEP" defaultValue="01310100" />
+        </div>
+      </Plate>
+
+      <Plate number="83" title="Currency input">
+        <CurrencyInput
+          className="w-full max-w-xs"
+          label="Valor do plano"
+          value={amount}
+          onChange={(v) => setAmount(v)}
+          hint="Formatação BRL automática"
+        />
+      </Plate>
+
+      <Plate number="84" title="Rating">
+        <div className="flex flex-col gap-4">
+          <Rating label="Satisfação com a vitrine" value={rating} onChange={setRating} />
+          <Rating label="Somente leitura" defaultValue={5} readOnly size="sm" />
+          <Caption>{rating} de 5 estrelas</Caption>
+        </div>
+      </Plate>
+
+      <Plate number="85" title="Kanban">
+        <Kanban columns={kanbanCols} onChange={setKanbanCols} className="w-full" />
+      </Plate>
+
+      <Plate number="86" title="Notification center">
+        <div className="flex items-center gap-4">
+          <NotificationCenter
+            items={notifs}
+            onMarkAllRead={() =>
+              setNotifs((list) => list.map((n) => ({ ...n, unread: false })))
+            }
+          />
+          <Caption>
+            {notifs.filter((n) => n.unread).length} não lida(s) — abra o sino
+          </Caption>
+        </div>
+      </Plate>
+
+      <Plate number="87" title="Filter bar">
+        <FilterBar
+          className="w-full max-w-xl"
+          active={activeFilters}
+          onRemove={(id) => setActiveFilters((f) => f.filter((x) => x.id !== id))}
+          onClearAll={() => setActiveFilters([])}
+        >
+          <Select value={region} onValueChange={setRegion}>
+            <SelectTrigger className="w-[160px]">
+              <SelectValue placeholder="Região" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="sa-east-1">São Paulo</SelectItem>
+              <SelectItem value="us-east-1">N. Virginia</SelectItem>
+            </SelectContent>
+          </Select>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() =>
+              setActiveFilters((f) =>
+                f.some((x) => x.id === 'prio')
+                  ? f
+                  : [...f, { id: 'prio', label: 'Prioridade: alta', tone: 'rust' }]
+              )
+            }
+          >
+            + Prioridade
+          </Button>
+        </FilterBar>
+      </Plate>
+
+      <Plate number="88" title="Activity feed">
+        <ActivityFeed
+          className="w-full max-w-md"
+          title="Atividade recente"
+          items={[
+            {
+              id: 'a1',
+              actor: 'Marina',
+              title: 'publicou a prancha Charts',
+              description: 'Redesign instrumental com sparklines.',
+              time: 'há 12 min',
+              tone: 'brass',
+            },
+            {
+              id: 'a2',
+              actor: 'Rafael',
+              title: 'moveu card no Kanban',
+              description: '“Tokens dia/noite” → Em andamento.',
+              time: 'há 40 min',
+              tone: 'verdigris',
+            },
+            {
+              id: 'a3',
+              actor: 'Lia',
+              title: 'comentou no chat',
+              description: 'Pediu FAQ e TeamGrid em PT-BR.',
+              time: 'há 2 h',
+              tone: 'neutral',
+            },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="89" title="Chat thread">
+        <ChatThread
+          className="w-full max-w-md"
+          header="Suporte Vernier · Lia"
+          messages={chatMsgs}
+          onSend={(body) =>
+            setChatMsgs((m) => [
+              ...m,
+              {
+                id: `c${Date.now()}`,
+                from: 'me',
+                body,
+                time: new Date().toLocaleTimeString('pt-BR', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                }),
+              },
+            ])
+          }
+        />
+      </Plate>
+
+      <Plate number="90" title="User menu">
+        <UserMenu
+          name="Ana Calibragem"
+          email="ana@vernier.dev"
+          plan="Pro · instrumento"
+          onSettings={() => undefined}
+          onLogout={() => undefined}
+        />
+      </Plate>
+
+      <Plate number="91" title="FAQ">
+        <FAQ
+          className="w-full"
+          title="Perguntas frequentes"
+          description="Como a Vernier entra no seu projeto."
+          items={[
+            {
+              question: 'É um pacote npm?',
+              answer:
+                'Não — copie as peças (estilo shadcn) ou use o MCP install_component no destino.',
+            },
+            {
+              question: 'Como alternar dia e noite?',
+              answer:
+                'Pelo Sol/Lua no topo da vitrine; a preferência fica em localStorage.',
+            },
+            {
+              question: 'Os tokens mudam de nome no light?',
+              answer:
+                'Não. As chaves (ink, panel, brass…) ficam; os valores vêm das CSS variables.',
+            },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="92" title="Feature bento">
+        <FeatureBento
+          title="Instrumentos do kit"
+          description="Peças que sustentam painel e site."
+          items={[
+            {
+              title: 'Precisão tipográfica',
+              description: 'Fraunces + General Sans + Space Mono alinhados ao aço oceano.',
+              icon: <Sparkles className="h-4 w-4" />,
+              span: 2,
+            },
+            {
+              title: 'Formulários densos',
+              description: 'Máscaras BR, moeda, tags e ranges sem fricção.',
+              icon: <Layers className="h-4 w-4" />,
+            },
+            {
+              title: 'Dados vivos',
+              description: 'Charts, Kanban e feeds pro painel operacional.',
+              icon: <Activity className="h-4 w-4" />,
+            },
+            {
+              title: 'MCP embutido',
+              description: 'Liste, leia e instale componentes direto no projeto.',
+              icon: <Box className="h-4 w-4" />,
+            },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="93" title="Comparison table">
+        <ComparisonTable
+          className="w-full"
+          caption="Planos Vernier"
+          plans={[
+            { id: 'starter', name: 'Starter' },
+            { id: 'pro', name: 'Pro', highlighted: true },
+            { id: 'scale', name: 'Scale' },
+          ]}
+          features={[
+            {
+              id: 'comp',
+              name: 'Componentes',
+              values: { starter: '40+', pro: '98', scale: 'Ilimitado' },
+            },
+            {
+              id: 'mcp',
+              name: 'Servidor MCP',
+              values: { starter: false, pro: true, scale: true },
+            },
+            {
+              id: 'tema',
+              name: 'Dia + noite',
+              values: { starter: true, pro: true, scale: true },
+            },
+            {
+              id: 'suporte',
+              name: 'Suporte',
+              values: { starter: 'Comunidade', pro: 'Prioritário', scale: 'Dedicado' },
+            },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="94" title="Section CTA">
+        <SectionCTA
+          className="w-full"
+          title="Leve a Vernier pro próximo layout"
+          description="Copie a prancha, calibre os tokens e publique com a mesma voz instrumentada."
+          primaryLabel="Abrir catálogo"
+          onPrimary={() => document.getElementById('catalog-search')?.focus()}
+          secondaryLabel="Ver tipografia"
+          onSecondary={() =>
+            document.getElementById('plate-00')?.scrollIntoView({ behavior: 'smooth' })
+          }
+        />
+      </Plate>
+
+      <Plate number="95" title="Announcement bar">
+        <div className="flex w-full flex-col gap-3">
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setAnnounceKey((k) => k + 1)
+              setShowAnnounce(true)
+            }}
+          >
+            Mostrar announcement bar
+          </Button>
+          {showAnnounce && (
+            <AnnouncementBar
+              key={announceKey}
+              href="#topo"
+              linkLabel="Ver catálogo"
+              onDismiss={() => setShowAnnounce(false)}
+            >
+              Novidade: 21 pranchas novas no catálogo Vernier.
+            </AnnouncementBar>
+          )}
+        </div>
+      </Plate>
+
+      <Plate number="96" title="Team grid">
+        <TeamGrid
+          title="Equipe de calibração"
+          description="Quem mantém o instrumento afiado."
+          members={[
+            {
+              name: 'Marina Costa',
+              role: 'Design systems',
+              bio: 'Tokens, tipografia e atmosfera oceano.',
+              tone: 'brass',
+            },
+            {
+              name: 'Rafael Nunes',
+              role: 'Engenharia UI',
+              bio: 'Forms densos, overlays e shells.',
+              tone: 'verdigris',
+            },
+            {
+              name: 'Lia Prado',
+              role: 'Produto',
+              bio: 'Vitrine, MCP e roadmap das pranchas.',
+              tone: 'neutral',
+            },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="97" title="Changelog">
+        <Changelog
+          className="w-full"
+          entries={[
+            {
+              version: '1.4.0',
+              date: '31 jul 2026',
+              title: 'Kit app + marketing',
+              tone: 'brass',
+              changes: [
+                'TagInput, MultiSelect, DateRange e TimePicker',
+                'Kanban, NotificationCenter e ChatThread',
+                'FAQ, FeatureBento, ComparisonTable e RichTextEditor',
+              ],
+            },
+            {
+              version: '1.3.0',
+              date: '20 jul 2026',
+              title: 'Charts instrumentais',
+              tone: 'verdigris',
+              changes: ['Plate 75 redesenhada com sparklines e funnel'],
+            },
+            {
+              version: '1.2.0',
+              date: '05 jul 2026',
+              title: 'Marketing pack',
+              tone: 'neutral',
+              changes: ['Gallery, VideoEmbed, StickyCTA e NavigationMenu'],
+            },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="98" title="Rich text editor">
+        <RichTextEditor
+          className="w-full max-w-xl"
+          label="Nota de calibração"
+          hint="Toolbar: negrito, itálico, título, lista e link"
+          value={richHtml}
+          onChange={setRichHtml}
+          minHeight="140px"
+        />
+      </Plate>
+
+      <Plates99to152 />
     </>
   )
 }

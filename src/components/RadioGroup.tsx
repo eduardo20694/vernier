@@ -22,7 +22,7 @@ export function RadioGroupItem({
         {...props}
       >
         <RadioPrimitive.Indicator className="flex items-center justify-center">
-          <span className="h-2 w-2 rounded-full bg-brass-bright shadow-[0_0_8px_rgba(201,166,107,0.6)]" />
+          <span className="h-2 w-2 rounded-full bg-brass-bright shadow-[0_0_8px_rgb(var(--brass)/0.6)]" />
         </RadioPrimitive.Indicator>
       </RadioPrimitive.Item>
       {label && (

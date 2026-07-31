@@ -21,15 +21,15 @@ export function EmptyState({ icon, title, description, action, className }: Empt
       )}
     >
       {icon && (
-        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-line bg-panel2 text-brass">
+        <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg border border-line bg-gradient-to-b from-panel2 to-panel text-brass-bright shadow-[inset_0_1px_0_rgb(var(--mist)/0.06)]">
           {icon}
         </div>
       )}
-      <h3 className="font-display text-lg font-medium text-vellum">{title}</h3>
+      <h3 className="font-display text-xl font-medium tracking-tight text-vellum">{title}</h3>
       {description && (
-        <p className="mt-1.5 max-w-sm text-sm text-vellum-muted">{description}</p>
+        <p className="mt-2 max-w-sm text-sm leading-relaxed text-vellum-muted">{description}</p>
       )}
-      {action && <div className="mt-5">{action}</div>}
+      {action && <div className="mt-6">{action}</div>}
     </div>
   )
 }

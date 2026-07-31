@@ -14,7 +14,7 @@ export interface SegmentedControlProps<T extends string = string> {
   size?: 'sm' | 'md'
 }
 
-// Interruptor multiposição — trilho escavado + segmento ativo em latão
+// Interruptor multiposição — trilho escavado + segmento ativo em azure
 // fundido. Sente-se como seletor mecânico, não como tabs web.
 export function SegmentedControl<T extends string = string>({
   value,
@@ -50,7 +50,7 @@ export function SegmentedControl<T extends string = string>({
                 ? [
                     'text-ink',
                     'bg-gradient-to-b from-brass-bright via-brass to-brass-dim',
-                    'shadow-[inset_0_1px_0_rgba(255,240,210,0.4),0_1px_3px_rgba(0,0,0,0.4)]',
+                    'shadow-[inset_0_1px_0_rgb(var(--mist)/0.4),0_1px_3px_rgb(var(--shade)/0.35)]',
                   ].join(' ')
                 : 'text-vellum-muted hover:text-vellum hover:bg-panel2/50',
               'disabled:cursor-not-allowed disabled:opacity-40'

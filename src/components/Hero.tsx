@@ -23,18 +23,22 @@ export function Hero({
   return (
     <section
       className={cn(
-        'relative overflow-hidden rounded-2xl border border-line bg-panel',
+        'relative overflow-hidden rounded-2xl border border-line bg-panel shadow-plate',
         className
       )}
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(201,166,107,0.08),transparent_50%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgb(var(--brass)/0.14),transparent_48%),radial-gradient(ellipse_at_bottom_left,rgb(var(--verdigris)/0.08),transparent_45%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brass-dim/40 to-transparent"
       />
       <div className="relative grid gap-10 px-8 py-14 lg:grid-cols-2 lg:items-center lg:px-12 lg:py-20">
         <div>
-          {eyebrow && <Overline>{eyebrow}</Overline>}
-          <h1 className="mt-3 font-display text-display-sm text-vellum sm:text-display">{title}</h1>
+          {eyebrow && <Overline tone="brass">{eyebrow}</Overline>}
+          <h1 className="mt-3 font-display text-display-sm leading-[0.98] text-vellum sm:text-display">{title}</h1>
           {description && (
             <p className="mt-5 max-w-xl text-lead text-vellum-muted">{description}</p>
           )}
@@ -46,7 +50,7 @@ export function Hero({
                 </Button>
               )}
               {secondaryAction && (
-                <Button variant="secondary" size="lg" onClick={secondaryAction.onClick}>
+                <Button variant="forged" size="lg" onClick={secondaryAction.onClick}>
                   {secondaryAction.label}
                 </Button>
               )}

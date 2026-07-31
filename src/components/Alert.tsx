@@ -5,10 +5,14 @@ import { cn } from '../lib/cn'
 type Tone = 'neutral' | 'brass' | 'verdigris' | 'rust'
 
 const toneClasses: Record<Tone, string> = {
-  neutral: 'border-line bg-panel2 text-vellum',
-  brass: 'border-brass-dim/60 bg-brass/10 text-brass-bright',
-  verdigris: 'border-verdigris-dim/60 bg-verdigris/10 text-verdigris',
-  rust: 'border-rust-dim/60 bg-rust/10 text-rust',
+  neutral:
+    'border-line bg-gradient-to-r from-panel2 to-panel text-vellum [box-shadow:inset_3px_0_0_0_rgb(var(--line)),inset_0_1px_0_rgb(var(--mist)/0.04)]',
+  brass:
+    'border-brass-dim/55 bg-gradient-to-r from-brass/[0.12] to-panel/80 text-brass-bright [box-shadow:inset_3px_0_0_0_rgb(var(--brass)),inset_0_1px_0_rgb(var(--brass)/0.08)]',
+  verdigris:
+    'border-verdigris-dim/55 bg-gradient-to-r from-verdigris/[0.12] to-panel/80 text-verdigris [box-shadow:inset_3px_0_0_0_rgb(var(--verdigris)),inset_0_1px_0_rgb(var(--verdigris)/0.08)]',
+  rust:
+    'border-rust-dim/55 bg-gradient-to-r from-rust/[0.12] to-panel/80 text-rust [box-shadow:inset_3px_0_0_0_rgb(var(--rust)),inset_0_1px_0_rgb(var(--rust)/0.08)]',
 }
 
 const defaultIcons: Record<Tone, ReactNode> = {

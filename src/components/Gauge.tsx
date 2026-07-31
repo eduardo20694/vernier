@@ -18,12 +18,12 @@ const sizeMap = {
 }
 
 const toneStroke = {
-  brass: '#C9A66B',
-  verdigris: '#5E8C7A',
-  rust: '#A6432B',
+  brass: 'rgb(var(--brass))',
+  verdigris: 'rgb(var(--verdigris))',
+  rust: 'rgb(var(--rust))',
 }
 
-// Instrumento circular — o vernier literal. Arco de latão sobre trilho escuro,
+// Instrumento circular — o vernier literal. Arco azure sobre trilho escuro,
 // valor em Space Mono no centro. SVG puro, sem lib de chart.
 export function Gauge({
   value,
@@ -53,25 +53,38 @@ export function Gauge({
         <defs>
           <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={toneStroke[tone]} stopOpacity="1" />
-            <stop offset="100%" stopColor={toneStroke[tone]} stopOpacity="0.55" />
+            <stop offset="55%" stopColor={toneStroke[tone]} stopOpacity="0.85" />
+            <stop offset="100%" stopColor={toneStroke[tone]} stopOpacity="0.4" />
           </linearGradient>
-          <filter id={glowId} x="-40%" y="-40%" width="180%" height="180%">
-            <feGaussianBlur stdDeviation="2.5" result="blur" />
+          <filter id={glowId} x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2.8" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          <radialGradient id={`${gradId}-face`} cx="40%" cy="35%" r="65%">
+            <stop offset="0%" stopColor="rgb(var(--mist))" stopOpacity="0.06" />
+            <stop offset="100%" stopColor="rgb(var(--ink))" stopOpacity="0.15" />
+          </radialGradient>
         </defs>
+        <circle
+          cx={cx}
+          cy={cy}
+          r={r - stroke * 0.35}
+          fill={`url(#${gradId}-face)`}
+          opacity="0.9"
+        />
         <circle
           cx={cx}
           cy={cy}
           r={r}
           fill="none"
-          stroke="#3A342C"
+          stroke="rgb(var(--line))"
           strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={`${arc} ${c}`}
+          opacity="0.85"
         />
         <circle
           cx={cx}
@@ -93,7 +106,7 @@ export function Gauge({
           <span className="ml-0.5 text-[0.55em] text-vellum-faint">{unit}</span>
         </span>
         {label && (
-          <span className={cn('mt-1 font-mono uppercase tracking-widest text-vellum-faint', labelSize)}>
+          <span className={cn('mt-1.5 font-mono uppercase tracking-[0.16em] text-vellum-faint', labelSize)}>
             {label}
           </span>
         )}

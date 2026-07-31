@@ -7,7 +7,7 @@ export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
   unit?: string
 }
 
-// Trilho usinado + polegar de latão. Range nativo estilizado — sem Radix,
+// Trilho usinado + polegar azure. Range nativo estilizado — sem Radix,
 // pra manter a lib leve e o controle 100% CSS.
 export const Slider = forwardRef<HTMLInputElement, SliderProps>(
   ({ className, label, showValue = true, unit, id, value, defaultValue, ...props }, ref) => {

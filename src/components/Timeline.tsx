@@ -15,7 +15,7 @@ export interface TimelineProps {
 }
 
 const toneDot: Record<NonNullable<TimelineItem['tone']>, string> = {
-  brass: 'bg-brass shadow-[0_0_10px_rgba(201,166,107,0.5)]',
+  brass: 'bg-brass shadow-[0_0_10px_rgb(var(--brass)/0.5)]',
   verdigris: 'bg-verdigris shadow-[0_0_10px_rgba(94,140,122,0.5)]',
   rust: 'bg-rust shadow-[0_0_10px_rgba(166,67,43,0.5)]',
   neutral: 'bg-line',

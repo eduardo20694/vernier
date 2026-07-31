@@ -12,7 +12,7 @@ export interface StatusDotProps {
 }
 
 const toneClasses: Record<Tone, string> = {
-  brass: 'bg-brass shadow-[0_0_8px_rgba(201,166,107,0.65)]',
+  brass: 'bg-brass shadow-[0_0_8px_rgb(var(--brass)/0.65)]',
   verdigris: 'bg-verdigris shadow-[0_0_8px_rgba(94,140,122,0.65)]',
   rust: 'bg-rust shadow-[0_0_8px_rgba(166,67,43,0.65)]',
   neutral: 'bg-vellum-faint shadow-none',

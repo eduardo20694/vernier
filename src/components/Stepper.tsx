@@ -25,7 +25,7 @@ export function Stepper({ steps, current, className }: StepperProps) {
                 className={cn(
                   'flex h-7 w-7 shrink-0 items-center justify-center rounded-full border font-mono text-xs',
                   done &&
-                    'border-brass bg-gradient-to-b from-brass-bright to-brass text-ink shadow-[0_0_12px_rgba(201,166,107,0.35)]',
+                    'border-brass bg-gradient-to-b from-brass-bright to-brass text-ink shadow-[0_0_12px_rgb(var(--brass)/0.35)]',
                   active && 'border-brass text-brass-bright bg-brass/10',
                   !done && !active && 'border-line text-vellum-faint bg-panel2'
                 )}

@@ -2,25 +2,235 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Vernier — aço oceano / instrumento de precisão.
+ * Chaves Tailwind (ink, panel, brass…) apontam pra estes canais RGB.
+ * .dark = noite (padrão) · .light = dia.
+ */
+
+:root,
+.light {
+  color-scheme: light;
+
+  --ink: 247 249 253;
+  --panel: 238 242 248;
+  --panel2: 226 233 243;
+  --line: 184 197 214;
+  --brass: 47 111 232;
+  --brass-dim: 36 88 184;
+  --brass-bright: 75 143 245;
+  --verdigris: 42 133 122;
+  --verdigris-dim: 28 90 82;
+  --rust: 201 62 62;
+  --rust-dim: 139 50 50;
+  --vellum: 10 21 40;
+  --vellum-muted: 51 72 96;
+  --vellum-faint: 90 107 132;
+  --mist: 255 255 255;
+  --shade: 10 21 40;
+
+  --gradient-brass-metal: linear-gradient(
+    180deg,
+    rgb(75 143 245) 0%,
+    rgb(47 111 232) 48%,
+    rgb(36 88 184) 100%
+  );
+  --gradient-panel-recess: linear-gradient(
+    180deg,
+    rgb(247 249 253) 0%,
+    rgb(238 242 248) 55%,
+    rgb(226 233 243) 100%
+  );
+  --shadow-plate:
+    inset 0 1px 0 rgb(var(--mist) / 0.85),
+    0 1px 0 rgb(var(--shade) / 0.04),
+    0 10px 28px rgb(var(--shade) / 0.07),
+    0 2px 6px rgb(var(--shade) / 0.04);
+  --shadow-brass:
+    0 0 0 1px rgb(var(--brass) / 0.22),
+    0 0 28px -4px rgb(var(--brass) / 0.32);
+  --shadow-forged:
+    inset 0 1px 0 rgb(var(--brass) / 0.18),
+    0 1px 0 rgb(var(--shade) / 0.06);
+
+  /* Dia — porcelain luminoso, bloom de céu frio, sombra nítida */
+  --catalog-ambient:
+    radial-gradient(ellipse 70% 50% at 15% -10%, rgb(var(--brass) / 0.12), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 95% 5%, rgb(186 214 255 / 0.45), transparent 50%),
+    radial-gradient(ellipse 55% 45% at 50% 110%, rgb(var(--verdigris) / 0.06), transparent 55%),
+    radial-gradient(ellipse 90% 70% at 50% 40%, transparent 50%, rgb(184 197 214 / 0.28) 100%),
+    linear-gradient(
+      180deg,
+      rgb(250 252 255) 0%,
+      rgb(247 249 253) 38%,
+      rgb(238 242 248) 100%
+    );
+
+  --topo-metal:
+    radial-gradient(ellipse 80% 60% at 88% 12%, rgb(var(--brass) / 0.16), transparent 58%),
+    radial-gradient(ellipse 55% 45% at 8% 85%, rgb(var(--verdigris) / 0.08), transparent 52%),
+    radial-gradient(ellipse 40% 35% at 55% 45%, rgb(var(--mist) / 0.55), transparent 70%),
+    linear-gradient(165deg, rgb(250 252 255) 0%, rgb(238 242 248) 48%, rgb(226 233 243) 100%);
+
+  --catalog-header-bg: linear-gradient(
+    180deg,
+    rgb(247 249 253 / 0.88) 0%,
+    rgb(247 249 253 / 0.72) 100%
+  );
+  --plate-face-bg:
+    linear-gradient(180deg, rgb(var(--mist) / 0.9) 0%, transparent 32%),
+    linear-gradient(180deg, rgb(250 252 255) 0%, rgb(238 242 248) 52%, rgb(226 233 243) 100%);
+  --plate-rivet: radial-gradient(circle at 35% 30%, rgb(210 220 234), rgb(226 233 243) 55%, rgb(238 242 248));
+  --tab-bg: linear-gradient(180deg, rgb(226 233 243) 0%, rgb(238 242 248) 100%);
+  --tab-active-bg: linear-gradient(
+    180deg,
+    rgb(var(--brass) / 0.12) 0%,
+    rgb(247 249 253 / 0.98) 100%
+  );
+  --grain-opacity: 0.028;
+  --grid-opacity: 0.035;
+  --bay-bg: linear-gradient(
+    180deg,
+    rgb(var(--mist) / 0.35) 0%,
+    transparent 40%,
+    rgb(var(--shade) / 0.02) 100%
+  );
+}
+
+.dark {
+  color-scheme: dark;
+
+  --ink: 7 13 24;
+  --panel: 15 23 38;
+  --panel2: 22 32 51;
+  --line: 36 50 74;
+  --brass: 62 138 232;
+  --brass-dim: 39 88 168;
+  --brass-bright: 107 168 245;
+  --verdigris: 58 150 138;
+  --verdigris-dim: 39 107 98;
+  --rust: 220 80 80;
+  --rust-dim: 139 50 50;
+  --vellum: 234 240 250;
+  --vellum-muted: 160 176 200;
+  --vellum-faint: 110 127 152;
+  --mist: 234 240 250;
+  --shade: 0 0 0;
+
+  --gradient-brass-metal: linear-gradient(
+    180deg,
+    rgb(107 168 245) 0%,
+    rgb(62 138 232) 48%,
+    rgb(39 88 168) 100%
+  );
+  --gradient-panel-recess: linear-gradient(
+    180deg,
+    rgb(7 13 24) 0%,
+    rgb(15 23 38) 55%,
+    rgb(22 32 51) 100%
+  );
+  --shadow-plate:
+    inset 0 1px 0 rgb(var(--mist) / 0.09),
+    inset 0 -1px 0 rgb(var(--shade) / 0.35),
+    0 1px 0 rgb(var(--shade) / 0.65),
+    0 16px 42px rgb(var(--shade) / 0.55),
+    0 4px 14px rgb(var(--shade) / 0.38);
+  --shadow-brass:
+    0 0 0 1px rgb(var(--brass) / 0.26),
+    0 0 28px -4px rgb(var(--brass) / 0.42);
+  --shadow-forged:
+    inset 0 1px 0 rgb(var(--brass) / 0.18),
+    0 1px 0 rgb(var(--shade) / 0.55);
+
+  /* Noite — planos em camadas, poça azure no horizonte, vinheta que faz as pranchas flutuar */
+  --catalog-ambient:
+    radial-gradient(ellipse 72% 52% at 12% -8%, rgb(var(--brass) / 0.22), transparent 56%),
+    radial-gradient(ellipse 55% 42% at 92% 4%, rgb(var(--brass-bright) / 0.11), transparent 50%),
+    radial-gradient(ellipse 85% 38% at 48% 108%, rgb(var(--brass) / 0.12), transparent 52%),
+    radial-gradient(ellipse 48% 32% at 72% 100%, rgb(var(--verdigris) / 0.09), transparent 48%),
+    radial-gradient(ellipse 92% 72% at 50% 38%, transparent 26%, rgb(0 0 0 / 0.74) 100%),
+    linear-gradient(
+      180deg,
+      rgb(4 9 18) 0%,
+      rgb(8 14 26) 32%,
+      rgb(7 13 24) 62%,
+      rgb(3 7 14) 100%
+    );
+
+  --topo-metal:
+    linear-gradient(180deg, rgb(var(--mist) / 0.07) 0%, transparent 22%),
+    radial-gradient(ellipse 70% 52% at 88% 8%, rgb(var(--brass) / 0.28), transparent 54%),
+    radial-gradient(ellipse 48% 42% at 12% 90%, rgb(var(--verdigris) / 0.11), transparent 50%),
+    radial-gradient(ellipse 55% 48% at 48% 52%, rgb(var(--brass) / 0.07), transparent 62%),
+    linear-gradient(
+      165deg,
+      rgb(20 30 48) 0%,
+      rgb(10 17 30) 38%,
+      rgb(7 13 24) 58%,
+      rgb(16 25 42) 82%,
+      rgb(22 32 51) 100%
+    );
+
+  --catalog-header-bg: linear-gradient(
+    180deg,
+    rgb(5 10 20 / 0.94) 0%,
+    rgb(7 13 24 / 0.82) 100%
+  );
+  --plate-face-bg:
+    linear-gradient(180deg, rgb(var(--mist) / 0.055) 0%, transparent 28%),
+    linear-gradient(180deg, rgb(10 18 32) 0%, rgb(12 20 34) 42%, rgb(18 28 46) 100%);
+  --plate-rivet: radial-gradient(circle at 35% 30%, rgb(68 88 118), rgb(22 32 51) 55%, rgb(10 16 28));
+  --tab-bg: linear-gradient(180deg, rgb(22 32 51) 0%, rgb(15 23 38) 100%);
+  --tab-active-bg: linear-gradient(
+    180deg,
+    rgb(var(--brass) / 0.16) 0%,
+    rgb(15 23 38 / 0.96) 100%
+  );
+  --grain-opacity: 0.05;
+  --grid-opacity: 0.07;
+  --bay-bg: linear-gradient(
+    185deg,
+    rgb(var(--mist) / 0.03) 0%,
+    transparent 28%,
+    rgb(var(--shade) / 0.28) 72%,
+    rgb(0 0 0 / 0.22) 100%
+  );
+}
+
 * {
   scrollbar-width: thin;
-  scrollbar-color: #3A342C transparent;
+  scrollbar-color: rgb(var(--line)) transparent;
 }
 
 html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Soft crossfade when day/night flips */
+  transition: background-color 380ms ease, color 380ms ease;
+}
+
+html.theme-switching,
+html.theme-switching * {
+  transition:
+    background-color 380ms ease,
+    border-color 380ms ease,
+    color 280ms ease,
+    box-shadow 380ms ease,
+    fill 380ms ease,
+    stroke 380ms ease !important;
 }
 
 body {
   font-feature-settings: "ss01" 1, "kern" 1;
   font-optical-sizing: auto;
+  background-color: rgb(var(--ink));
+  color: rgb(var(--vellum));
 }
 
 ::selection {
-  background: rgba(201, 166, 107, 0.35);
-  color: #EDE8DF;
+  background: rgb(var(--brass) / 0.35);
+  color: rgb(var(--vellum));
 }
 
 .font-display {
@@ -32,24 +242,105 @@ body {
   font-feature-settings: "tnum" 1, "zero" 1;
 }
 
+/* Wordmark Vernier — estágio do brand no hero topo */
+.vernier-mark {
+  position: relative;
+  display: inline-block;
+  letter-spacing: -0.045em;
+  font-optical-sizing: auto;
+  font-feature-settings: "SOFT" 1, "WONK" 0.35;
+  font-variation-settings: "SOFT" 1, "WONK" 0.35, "opsz" 144;
+}
+
+.vernier-mark::after {
+  content: '';
+  position: absolute;
+  left: 0.04em;
+  right: 0.1em;
+  bottom: 0.02em;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--brass) / 0.45) 22%,
+    rgb(var(--brass-bright) / 0.7) 50%,
+    rgb(var(--brass) / 0.45) 78%,
+    transparent 100%
+  );
+  opacity: 0.85;
+}
+
+/* Dia — navy nítido, filete gravado discreto */
+.light .vernier-mark {
+  color: rgb(var(--vellum));
+  background: none;
+  -webkit-text-fill-color: unset;
+  text-shadow: 0 1px 0 rgb(var(--mist) / 0.55);
+}
+
+.light .vernier-mark::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--brass) / 0.35) 25%,
+    rgb(var(--brass-dim) / 0.55) 50%,
+    rgb(var(--brass) / 0.35) 75%,
+    transparent 100%
+  );
+  opacity: 0.7;
+}
+
+/* Noite — preenchimento crisp + borda azure suave (não neon) */
+.dark .vernier-mark {
+  background-image: linear-gradient(
+    188deg,
+    rgb(244 248 255) 0%,
+    rgb(220 232 248) 38%,
+    rgb(178 206 240) 72%,
+    rgb(130 178 232) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter:
+    drop-shadow(0 1px 0 rgb(107 168 245 / 0.28))
+    drop-shadow(0 0 22px rgb(62 138 232 / 0.16));
+}
+
+.dark .vernier-mark::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--brass) / 0.4) 18%,
+    rgb(var(--brass-bright) / 0.75) 50%,
+    rgb(var(--brass) / 0.4) 82%,
+    transparent 100%
+  );
+  opacity: 0.9;
+  box-shadow: 0 0 10px rgb(var(--brass) / 0.2);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
   }
+  html.theme-switching,
+  html.theme-switching * {
+    transition: none !important;
+  }
 }
 
 .focus-ring:focus-visible {
-  outline: 2px solid #C9A66B;
+  outline: 2px solid rgb(var(--brass));
   outline-offset: 2px;
 }
 
 /*
- * .shadow-board é o elemento-assinatura da Vernier: o contorno gravado
- * atrás de cada componente na página de showcase, como o desenho de
- * silhueta num quadro de ferramentas de oficina — mostra "aqui é o lugar
- * desta peça". Usado só na vitrine, nunca dentro dos componentes em uso
- * real, pra não virar decoração barata.
+ * .shadow-board — silhueta gravada atrás da peça na vitrine.
+ * Elegante, discreto — o componente é o foco.
  */
 .shadow-board {
   position: relative;
@@ -57,13 +348,20 @@ body {
 .shadow-board::before {
   content: '';
   position: absolute;
-  inset: -1px;
-  border: 1px dashed #3A342C;
-  border-radius: 8px;
+  inset: -6px;
+  border: 1px dashed rgb(var(--line) / 0.55);
+  border-radius: 10px;
   pointer-events: none;
+  opacity: 0.7;
 }
 
-/* Polegar de latão do Slider — WebKit + Firefox */
+.dark .shadow-board::before {
+  border-color: rgb(var(--brass-bright) / 0.22);
+  opacity: 0.85;
+  box-shadow: inset 0 0 0 1px rgb(var(--mist) / 0.03);
+}
+
+/* Polegar azure do Slider — WebKit + Firefox */
 .vernier-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -71,72 +369,560 @@ body {
   width: 16px;
   margin-top: -5px;
   border-radius: 9999px;
-  border: 1px solid #E0C08A;
-  background: linear-gradient(180deg, #E0C08A 0%, #C9A66B 45%, #8A7047 100%);
+  border: 1px solid rgb(var(--brass-bright));
+  background: var(--gradient-brass-metal);
   box-shadow:
-    inset 0 1px 0 rgba(255, 240, 210, 0.45),
-    0 0 0 3px rgba(27, 24, 21, 0.9),
-    0 0 12px rgba(201, 166, 107, 0.45);
+    inset 0 1px 0 rgb(var(--mist) / 0.45),
+    0 0 0 3px rgb(var(--ink) / 0.9),
+    0 0 12px rgb(var(--brass) / 0.45);
   cursor: pointer;
   transition: transform 150ms ease, box-shadow 150ms ease;
 }
 .vernier-slider::-webkit-slider-runnable-track {
   height: 6px;
   border-radius: 9999px;
-  background: linear-gradient(90deg, #2C2822, #3A342C, #2C2822);
-  border: 1px solid #3A342C;
+  background: linear-gradient(90deg, rgb(var(--panel2)), rgb(var(--line)), rgb(var(--panel2)));
+  border: 1px solid rgb(var(--line));
 }
 .vernier-slider:hover::-webkit-slider-thumb {
   transform: scale(1.08);
   box-shadow:
-    inset 0 1px 0 rgba(255, 240, 210, 0.55),
-    0 0 0 3px rgba(27, 24, 21, 0.9),
-    0 0 18px rgba(224, 192, 138, 0.6);
+    inset 0 1px 0 rgb(var(--mist) / 0.55),
+    0 0 0 3px rgb(var(--ink) / 0.9),
+    0 0 18px rgb(var(--brass-bright) / 0.55);
 }
 .vernier-slider::-moz-range-thumb {
   height: 16px;
   width: 16px;
   border-radius: 9999px;
-  border: 1px solid #E0C08A;
-  background: linear-gradient(180deg, #E0C08A 0%, #C9A66B 45%, #8A7047 100%);
+  border: 1px solid rgb(var(--brass-bright));
+  background: var(--gradient-brass-metal);
   box-shadow:
-    inset 0 1px 0 rgba(255, 240, 210, 0.45),
-    0 0 0 3px rgba(27, 24, 21, 0.9),
-    0 0 12px rgba(201, 166, 107, 0.45);
+    inset 0 1px 0 rgb(var(--mist) / 0.45),
+    0 0 0 3px rgb(var(--ink) / 0.9),
+    0 0 12px rgb(var(--brass) / 0.45);
   cursor: pointer;
 }
 .vernier-slider::-moz-range-track {
   height: 6px;
   border-radius: 9999px;
-  background: linear-gradient(90deg, #2C2822, #3A342C, #2C2822);
-  border: 1px solid #3A342C;
+  background: linear-gradient(90deg, rgb(var(--panel2)), rgb(var(--line)), rgb(var(--panel2)));
+  border: 1px solid rgb(var(--line));
 }
 
-/* Ambiente da vitrine — madeira escura, sem cast amarelo em tudo */
+/* ── Ambiente da vitrine ── */
 .catalog-ambient {
-  background:
-    radial-gradient(ellipse 70% 45% at 8% -8%, rgba(44, 40, 34, 0.9), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 92% 8%, rgba(94, 140, 122, 0.04), transparent 50%),
-    linear-gradient(180deg, #1B1815 0%, #1E1B17 45%, #1B1815 100%);
+  background: var(--catalog-ambient);
 }
 
+/* Grade fina + film grain — craft, não sci-fi */
+.catalog-ambient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(var(--mist) / var(--grid-opacity)) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--mist) / var(--grid-opacity)) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, black 20%, transparent 75%);
+  pointer-events: none;
+}
+
+.catalog-ambient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: var(--grain-opacity);
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+}
+
+.light .catalog-ambient::before {
+  background-image:
+    linear-gradient(rgb(var(--shade) / var(--grid-opacity)) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--shade) / var(--grid-opacity)) 1px, transparent 1px);
+}
+
+.light .catalog-ambient::after {
+  mix-blend-mode: multiply;
+}
+
+/* Noite — grade de vidro de instrumento / papel de plotagem */
+.dark .catalog-ambient::before {
+  background-image:
+    linear-gradient(rgb(var(--brass-bright) / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--brass-bright) / 0.045) 1px, transparent 1px),
+    linear-gradient(rgb(var(--mist) / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--mist) / 0.04) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px, 192px 192px, 192px 192px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 28%, black 18%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 28%, black 18%, transparent 78%);
+  opacity: 0.95;
+}
+
+.dark .catalog-ambient::after {
+  mix-blend-mode: soft-light;
+  opacity: calc(var(--grain-opacity) + 0.01);
+}
+
+/* Metal ambient no hero do topo */
+.topo-metal {
+  background: var(--topo-metal);
+}
+
+.topo-bloom {
+  animation: topo-breathe 9s ease-in-out infinite;
+}
+
+.topo-sweep {
+  animation: topo-sweep 12s ease-in-out infinite;
+}
+
+@keyframes topo-breathe {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.08); }
+}
+
+@keyframes topo-sweep {
+  0%, 100% {
+    opacity: 0.2;
+    transform: translateX(-8%) translateY(0);
+  }
+  50% {
+    opacity: 0.45;
+    transform: translateX(6%) translateY(-4%);
+  }
+}
+
+/* ── Hero topo — composição lookbook ── */
+.topo-hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.topo-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 1px 0 rgb(var(--mist) / 0.08),
+    inset 0 0 80px rgb(var(--shade) / 0.12);
+  z-index: 1;
+}
+
+/* Noite — metal em camadas, filete de borda, estágio pro wordmark */
+.dark .topo-hero {
+  border-color: rgb(var(--line) / 0.55);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--mist) / 0.1),
+    0 24px 64px rgb(0 0 0 / 0.45);
+}
+
+.dark .topo-hero::after {
+  box-shadow:
+    inset 0 1px 0 rgb(var(--mist) / 0.14),
+    inset 0 -1px 0 rgb(var(--brass) / 0.12),
+    inset 1px 0 0 rgb(var(--mist) / 0.04),
+    inset -1px 0 0 rgb(var(--mist) / 0.04),
+    inset 0 0 100px rgb(0 0 0 / 0.28),
+    inset 0 -60px 80px -20px rgb(var(--brass) / 0.06);
+}
+
+.dark .topo-hero .topo-metal {
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--brass) / 0.08);
+}
+
+.topo-gauge-atmosphere {
+  opacity: 0.22;
+  filter: blur(0.5px);
+  transform: scale(1.35);
+  transition: opacity 400ms ease;
+}
+
+.topo-hero:hover .topo-gauge-atmosphere {
+  opacity: 0.32;
+}
+
+.dark .topo-gauge-atmosphere {
+  opacity: 0.12;
+}
+
+.dark .topo-hero:hover .topo-gauge-atmosphere {
+  opacity: 0.18;
+}
+
+/* ── Prancha da vitrine ── */
 .catalog-plate {
-  animation: catalog-rise 0.45s ease-out both;
+  animation: catalog-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.catalog-plate > .catalog-plate-face {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.875rem;
+  border: 1px solid rgb(var(--line) / 0.85);
+  background: var(--plate-face-bg);
+  box-shadow: var(--shadow-plate);
+  transition:
+    border-color 260ms ease,
+    box-shadow 260ms ease,
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Baía do instrumento — stage suave atrás das demos */
+.catalog-plate > .catalog-plate-face .instrument-bay {
+  position: relative;
+  border-radius: 0.625rem;
+  background: var(--bay-bg);
+  border: 1px solid rgb(var(--line) / 0.4);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--mist) / 0.04),
+    inset 0 -1px 0 rgb(var(--shade) / 0.08);
+  padding: 1.5rem 1.75rem;
+}
+
+/* Noite — cavidade rebaixada / stage iluminado */
+.dark .catalog-plate > .catalog-plate-face .instrument-bay {
+  border-color: rgb(var(--line) / 0.55);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--mist) / 0.06),
+    inset 0 12px 28px rgb(0 0 0 / 0.35),
+    inset 0 -1px 0 rgb(var(--brass) / 0.08),
+    0 0 0 1px rgb(0 0 0 / 0.25);
+}
+
+@media (min-width: 640px) {
+  .catalog-plate > .catalog-plate-face .instrument-bay {
+    padding: 2rem 2.25rem;
+  }
+}
+
+/* Quatro rebites — craft discreto */
+.catalog-plate > .catalog-plate-face::before,
+.catalog-plate > .catalog-plate-face::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: var(--plate-rivet);
+  box-shadow:
+    inset 0 0.5px 0 rgb(var(--mist) / 0.25),
+    0 0.5px 1px rgb(var(--shade) / 0.25);
+  pointer-events: none;
+  opacity: 0.55;
+  z-index: 2;
+}
+
+.catalog-plate > .catalog-plate-face::before {
+  top: 11px;
+  left: 11px;
+  box-shadow:
+    inset 0 0.5px 0 rgb(var(--mist) / 0.25),
+    0 0.5px 1px rgb(var(--shade) / 0.25),
+    calc(100% - 27px) 0 0 0 transparent;
+}
+
+.catalog-plate > .catalog-plate-face::after {
+  top: 11px;
+  right: 11px;
+}
+
+.catalog-plate-rivets {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.catalog-plate-rivets span {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: var(--plate-rivet);
+  box-shadow:
+    inset 0 0.5px 0 rgb(var(--mist) / 0.25),
+    0 0.5px 1px rgb(var(--shade) / 0.25);
+  opacity: 0.55;
+}
+
+.catalog-plate-rivets span:nth-child(1) { bottom: 11px; left: 11px; }
+.catalog-plate-rivets span:nth-child(2) { bottom: 11px; right: 11px; }
+
+.catalog-plate:hover > .catalog-plate-face {
+  border-color: rgb(var(--brass) / 0.35);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--mist) / 0.08),
+    inset 0 -1px 0 rgb(var(--shade) / 0.15),
+    0 0 0 1px rgb(var(--brass) / 0.1),
+    0 4px 8px rgb(var(--shade) / 0.08),
+    0 18px 40px rgb(var(--shade) / 0.16),
+    0 0 40px -12px rgb(var(--brass) / 0.18);
+}
+
+.dark .catalog-plate > .catalog-plate-face {
+  border-color: rgb(var(--line) / 0.75);
+  box-shadow:
+    var(--shadow-plate),
+    0 0 0 1px rgb(var(--brass) / 0.04);
+}
+
+.dark .catalog-plate:hover > .catalog-plate-face {
+  border-color: rgb(var(--brass-bright) / 0.48);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--mist) / 0.12),
+    inset 0 -1px 0 rgb(var(--shade) / 0.25),
+    0 0 0 1px rgb(var(--brass) / 0.22),
+    0 6px 12px rgb(0 0 0 / 0.35),
+    0 22px 48px rgb(0 0 0 / 0.42),
+    0 0 48px -10px rgb(var(--brass) / 0.28);
 }
 
 @keyframes catalog-rise {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(16px) scale(0.988);
+    filter: saturate(0.88);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: saturate(1);
   }
+}
+
+/* Título da prancha — número gravado + Fraunces */
+.plate-number {
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgb(var(--brass-dim));
+  text-shadow: 0 1px 0 rgb(var(--mist) / 0.04);
+}
+
+.plate-title {
+  font-family: Fraunces, Georgia, serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: rgb(var(--vellum));
+}
+
+/* Abas usinadas do catálogo */
+.catalog-tab {
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 0.375rem;
+  border: 1px solid rgb(var(--line) / 0.9);
+  background: var(--tab-bg);
+  padding: 0.4rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgb(var(--vellum-muted));
+  box-shadow: inset 0 1px 0 rgb(var(--mist) / 0.06);
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.catalog-tab:hover {
+  color: rgb(var(--vellum));
+  border-color: rgb(var(--brass-dim) / 0.5);
+}
+
+.catalog-tab[data-active='true'] {
+  color: rgb(var(--brass-bright));
+  border-color: rgb(var(--brass) / 0.45);
+  background: var(--tab-active-bg);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--brass-bright) / 0.14),
+    inset 0 -1px 0 rgb(var(--shade) / 0.2),
+    0 0 18px -6px rgb(var(--brass) / 0.35);
+}
+
+.catalog-tab[data-active='true']::after {
+  content: '';
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(var(--brass)), transparent);
+}
+
+/* Header glass/steel */
+.catalog-header {
+  position: relative;
+  background: var(--catalog-header-bg);
+  backdrop-filter: blur(20px) saturate(1.15);
+  -webkit-backdrop-filter: blur(20px) saturate(1.15);
+  box-shadow:
+    inset 0 -1px 0 rgb(var(--line) / 0.9),
+    0 10px 32px rgb(var(--shade) / 0.14);
+}
+
+.catalog-header::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--brass) / 0.35) 30%,
+    rgb(var(--brass-bright) / 0.65) 50%,
+    rgb(var(--brass) / 0.35) 70%,
+    transparent 100%
+  );
+}
+
+.catalog-header::after {
+  content: '';
+  position: absolute;
+  inset-inline: 12%;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--brass) / 0.15),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Noite — vidro mais denso, filete e sombra de separação */
+.dark .catalog-header {
+  backdrop-filter: blur(28px) saturate(1.35);
+  -webkit-backdrop-filter: blur(28px) saturate(1.35);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--mist) / 0.08),
+    inset 0 -1px 0 rgb(var(--line) / 0.85),
+    0 12px 40px rgb(0 0 0 / 0.45),
+    0 1px 0 rgb(var(--brass) / 0.08);
+}
+
+.dark .catalog-header::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(var(--brass) / 0.45) 28%,
+    rgb(var(--brass-bright) / 0.8) 50%,
+    rgb(var(--brass) / 0.45) 72%,
+    transparent 100%
+  );
+}
+
+.dark .catalog-header::after {
+  inset-inline: 8%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--brass) / 0.28),
+    transparent
+  );
+}
+
+/* Theme toggle premium — aço com filete */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.25rem;
+  padding: 0 0.65rem 0 0.55rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(var(--line));
+  background: linear-gradient(
+    180deg,
+    rgb(var(--panel2)) 0%,
+    rgb(var(--panel)) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgb(var(--mist) / 0.08),
+    0 1px 0 rgb(var(--shade) / 0.2);
+  color: rgb(var(--brass-bright));
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease;
+}
+
+.theme-toggle:hover {
+  border-color: rgb(var(--brass) / 0.45);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--brass-bright) / 0.12),
+    0 0 20px -6px rgb(var(--brass) / 0.35);
+  color: rgb(var(--brass-bright));
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid rgb(var(--brass));
+  outline-offset: 2px;
+}
+
+.theme-toggle__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.375rem;
+  background: rgb(var(--brass) / 0.1);
+  border: 1px solid rgb(var(--brass) / 0.2);
+}
+
+.theme-toggle__label {
+  display: none;
+  padding-right: 0.15rem;
+}
+
+@media (min-width: 640px) {
+  .theme-toggle__label {
+    display: inline;
+  }
+}
+
+/* Empty state da vitrine */
+.catalog-empty {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgb(var(--line) / 0.8);
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgb(var(--brass) / 0.08), transparent 60%),
+    linear-gradient(180deg, rgb(var(--panel)) 0%, rgb(var(--panel2) / 0.6) 100%);
+  box-shadow: var(--shadow-plate);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .catalog-plate {
     animation: none;
+  }
+  .topo-bloom,
+  .topo-sweep {
+    animation: none;
+  }
+  .catalog-plate:hover > .catalog-plate-face {
+    transform: none;
   }
 }

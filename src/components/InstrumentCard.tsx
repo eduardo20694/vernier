@@ -8,7 +8,7 @@ export interface InstrumentCardProps extends HTMLAttributes<HTMLDivElement> {
   glow?: boolean
 }
 
-// Cartão premium com borda em gradiente de latão (máscara CSS) e vinheta
+// Cartão premium com borda em gradiente azure (máscara CSS) e vinheta
 // interna. É o Card "de vitrine" — pra hero metrics e painéis especiais.
 export function InstrumentCard({
   className,
@@ -23,8 +23,8 @@ export function InstrumentCard({
     <div
       className={cn(
         'relative rounded-lg p-[1px]',
-        'bg-gradient-to-br from-brass-bright/70 via-line to-brass-dim/40',
-        glow && 'shadow-[0_0_32px_-8px_rgba(201,166,107,0.4)]',
+        'bg-gradient-to-br from-brass-bright/65 via-line/80 to-brass-dim/35',
+        glow && 'shadow-[0_0_40px_-10px_rgb(var(--brass)/0.42),0_8px_24px_-8px_rgb(var(--shade)/0.35)]',
         className
       )}
       {...props}
@@ -37,11 +37,15 @@ export function InstrumentCard({
       >
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-brass/10 blur-2xl"
+          className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-brass/[0.12] blur-3xl"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brass-bright/50 to-transparent"
+          className="pointer-events-none absolute -bottom-16 -left-8 h-32 w-32 rounded-full bg-verdigris/[0.06] blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brass-bright/55 to-transparent"
         />
         {(eyebrow || title || action) && (
           <div className="relative flex items-start justify-between gap-3 px-5 pt-5">
@@ -52,7 +56,7 @@ export function InstrumentCard({
                 </p>
               )}
               {title && (
-                <h3 className="mt-1 font-display text-xl font-medium text-vellum">{title}</h3>
+                <h3 className="mt-1 font-display text-xl font-medium tracking-tight text-vellum">{title}</h3>
               )}
             </div>
             {action}

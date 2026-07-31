@@ -1,18 +1,18 @@
 # Vernier
 
-Biblioteca pessoal de componentes React — construída pra ser reaproveitada no Dockwatch, no Rowkeeper e em qualquer projeto futuro seu.
+Biblioteca pessoal de componentes React — um instrumento de precisão pra montar UI em qualquer projeto.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-C9A66B.svg)](./LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-4B8CFF.svg)](./LICENSE)
 
 ## A ideia
 
-Cada um dos seus projetos de infra tem sua própria identidade visual: o Dockwatch é "control room" (grafite + âmbar), o Rowkeeper é "livro-razão" (tinta + carmesim). A Vernier é a terceira identidade da família — a bancada de um **instrumentista de precisão**: latão envelhecido, madeira escura, pátina de cobre. É onde seus componentes reutilizáveis moram, sem carregar a marca de nenhum produto específico.
+A Vernier é um design system autônomo com a identidade de um **instrumento de precisão / aço oceano**: navy profundo, painéis blue-slate, acento azure luminoso — com modos dia e noite. É onde seus componentes reutilizáveis moram — tipografia, forms, overlays, shells e instrumentos de painel — sem carregar a marca de nenhum produto externo.
 
-**Elemento-assinatura:** cada componente na vitrine (`npm run dev`) aparece dentro de um "quadro de ferramenta" — o contorno tracejado atrás, como um pegboard de oficina que mostra "aqui é o lugar desta peça".
+**Elemento-assinatura:** cada componente na vitrine (`npm run dev`) aparece dentro de um "quadro de instrumento" — o contorno tracejado atrás, como um painel usinado que mostra "aqui é o lugar desta peça". Alterna dia/noite pelo Sol/Lua no topo (persistido em `localStorage`).
 
-## O que já tem (~65 pranchas)
+## O que já tem (~152 pranchas)
 
-Kit completo pra app + site: tipografia, forms (incl. Combobox, Calendar, OTP, Wizard), overlays (modais, sheet, command, context), navegação (navbar, mobile nav, menubar, app shell), marketing (Hero, Pricing, Footer, Carousel, Error page, Cookie), dados (DataTable com sort/filter/select) e instrumentos (Gauge, Stat).
+Kit expansivo pra app + site: tipografia, forms densos (Combobox, Calendar, DatePicker, DateRange, TimePicker, OTP, Wizard, TagInput, MultiSelect, MaskedInput, CurrencyInput, Phone, CreditCard, Quantity, RangeSlider, SignaturePad, TransferList, Waitlist, ImageUpload, RichTextEditor…), overlays (modais, sheet, command, context, MentionList, ConfirmDelete), navegação (navbar, mobile nav, menubar, navigation menu, app shell, UserMenu, TOC, SiteMap, SkipLink, LanguageSwitcher), marketing (Hero/HeroSplit, Pricing/PricingToggle, Footer, Carousel, Testimonial, LogoCloud/LogoMarquee, BlogArticle, Gallery, VideoEmbed, StickyCTA, FAQ, FeatureBento, ComparisonTable, SectionCTA, AnnouncementBar, TeamGrid, AuthorCard, Countdown, SocialShare, BrowserFrame, Error/Maintenance, Cookie), dados (DataTable, Charts, Heatmap, Scatter, TreeView, Kanban, FilterBar, ActivityFeed, Changelog, JsonViewer, DiffView, Terminal, SortableList), app (NotificationCenter, ChatThread, BulkActionsBar, PageHeader, ResizablePanels, ProfileHeader, SettingsSection, CommentList, FileList, OfflineBanner, ThemeToggle) e instrumentos (Gauge, Stat, SparkStat, MetricRow, DataCard, StatsStrip, AnimatedNumber, CircularProgress, Presence).
 
 ## Rodando a vitrine
 
@@ -23,16 +23,26 @@ npm run dev
 
 Abre em `localhost:5174` — mostra todas as peças no formato de catálogo.
 
-## Usando num projeto (Dockwatch, Rowkeeper, ou novo)
+## Usando num projeto React
 
-Já que é uso pessoal (não vai virar pacote publicado), o caminho mais simples é copiar a pasta `src/components/` + `src/lib/cn.ts` + o `tailwind.config.js` (mesclando com o do projeto de destino) direto pra dentro do projeto que for usar — do jeito que o shadcn/ui também funciona. Não precisa de versionamento de pacote pra isso.
+Caminho shadcn-style (copiar arquivos — sem pacote npm). Checklist pra o destino ficar com a cara da Vernier:
+
+1. **Componentes** — copie `src/components/` (ou use MCP `install_component` peça a peça)
+2. **Utilitário** — copie `src/lib/cn.ts` (`clsx` + `tailwind-merge`)
+3. **Tokens + Tailwind** — copie/mescle `src/tokens.json` e, no `tailwind.config.js` do destino, as seções de `colors`, `fontSize`, `fontFamily` e `boxShadow` (e o plugin `tailwindcss-animate` se usar overlays)
+4. **CSS** — traga de `src/index.css` o que for relevante: `.focus-ring`, `.vernier-slider`, `::selection`, `prefers-reduced-motion`; se o tema usar variáveis CSS no `:root`/`.dark`, copie/mescle também
+5. **Fontes** — no `index.html`: Fraunces + Space Mono (Google Fonts) e General Sans (Fontshare)
+6. **Tema** — `class="dark"` (ou light) no `<html>`; se usar toasts, envolva a app com `ToastProvider`
+
+MCP `install_component` continua disponível pra puxar um componente + deps locais sem copiar o kit inteiro.
+
+### Sync checklist (nova prancha)
+
+Ao adicionar componente: `catalog.ts` + demo no `Showcase.tsx` + export em `src/index.ts` + entrada em `mcp/src/manifest.ts`.
 
 ## Próximas pranchas (ainda não construídas)
 
-- Tree view
-- Color picker
-- Charts (via lib dedicada)
-- Rich text editor
+_(nenhuma no backlog por agora)_
 
 ## Servidor MCP
 
@@ -75,3 +85,7 @@ Testei os 4 tools manualmente simulando o handshake MCP (incluindo escrita real 
 - **Fraunces** (display, título) — Google Fonts
 - **General Sans** (corpo/UI) — via Fontshare
 - **Space Mono** (dado/número/código) — Google Fonts
+
+## Licença
+
+MIT — veja [LICENSE](./LICENSE).

@@ -1,8 +1,8 @@
 // Servidor MCP da Vernier — roda via stdio, pra ser registrado no Claude
 // Desktop ou no Cursor. Resolve dois problemas: (1) a IA parar de "chutar"
 // como um componente da Vernier funciona e ler a definição real, e (2)
-// automatizar o passo manual de copiar componente pra dentro de outro
-// projeto (Dockwatch, Rowkeeper, ou um novo).
+// automatizar o passo manual de copiar componente pra dentro de qualquer
+// projeto React de destino.
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { z } from 'zod'

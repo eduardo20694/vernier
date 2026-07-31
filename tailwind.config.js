@@ -1,34 +1,49 @@
 /** @type {import('tailwindcss').Config} */
 import tokens from './src/tokens.json' with { type: 'json' }
 
+/** RGB channel tokens → `rgb(var(--x) / <alpha-value>)` so themes flip via CSS vars. */
+const channel = (name) => `rgb(var(--${name}) / <alpha-value>)`
+
 export default {
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        ink: tokens.colors.ink,
-        panel: tokens.colors.panel,
-        panel2: tokens.colors.panel2,
-        line: tokens.colors.line,
-        brass: tokens.colors.brass,
-        verdigris: tokens.colors.verdigris,
-        rust: tokens.colors.rust,
-        vellum: tokens.colors.vellum,
+        ink: channel('ink'),
+        panel: channel('panel'),
+        panel2: channel('panel2'),
+        line: channel('line'),
+        brass: {
+          DEFAULT: channel('brass'),
+          dim: channel('brass-dim'),
+          bright: channel('brass-bright'),
+        },
+        verdigris: {
+          DEFAULT: channel('verdigris'),
+          dim: channel('verdigris-dim'),
+        },
+        rust: {
+          DEFAULT: channel('rust'),
+          dim: channel('rust-dim'),
+        },
+        vellum: {
+          DEFAULT: channel('vellum'),
+          muted: channel('vellum-muted'),
+          faint: channel('vellum-faint'),
+        },
       },
       fontFamily: tokens.fontFamily,
       fontSize: tokens.fontSize,
       borderRadius: tokens.borderRadius,
       boxShadow: {
-        plate: '0 1px 0 rgba(0,0,0,0.4), 0 8px 20px rgba(0,0,0,0.35)',
-        brass: '0 0 0 1px rgba(201,166,107,0.25), 0 0 24px -4px rgba(201,166,107,0.5)',
-        forged: 'inset 0 1px 0 rgba(201,166,107,0.18), 0 1px 0 rgba(0,0,0,0.5)',
+        plate: 'var(--shadow-plate)',
+        brass: 'var(--shadow-brass)',
+        forged: 'var(--shadow-forged)',
       },
       backgroundImage: {
-        'brass-metal':
-          'linear-gradient(180deg, #E0C08A 0%, #C9A66B 48%, #8A7047 100%)',
-        'panel-recess':
-          'linear-gradient(180deg, #1B1815 0%, #24211D 55%, #2C2822 100%)',
+        'brass-metal': 'var(--gradient-brass-metal)',
+        'panel-recess': 'var(--gradient-panel-recess)',
       },
       letterSpacing: {
         display: '-0.035em',

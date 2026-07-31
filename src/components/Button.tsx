@@ -19,41 +19,42 @@ const variantClasses: Record<Variant, string> = {
     'bg-transparent text-vellum-muted hover:text-vellum hover:bg-panel2 disabled:opacity-40',
   danger:
     'bg-transparent border border-rust-dim text-rust hover:bg-rust-dim/20 disabled:opacity-40',
-  // Latão fundido: gradiente vertical + brilho superior + sombra quente
+  // Aço azure fundido: gradiente vertical + brilho superior + aura fria
   gradient:
     [
       'relative overflow-hidden text-ink border border-brass-bright/40',
       'bg-gradient-to-b from-brass-bright via-brass to-brass-dim',
-      'shadow-[inset_0_1px_0_rgba(255,240,210,0.45),0_1px_0_rgba(0,0,0,0.35),0_8px_18px_-6px_rgba(201,166,107,0.45)]',
-      'hover:from-[#E8CFA0] hover:via-brass-bright hover:to-brass',
-      'active:from-brass active:via-brass-dim active:to-[#6F5836]',
-      'active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.35)]',
-      'disabled:from-brass-dim disabled:via-brass-dim disabled:to-[#6B5535] disabled:text-ink/50 disabled:shadow-none',
+      'shadow-[inset_0_1px_0_rgb(var(--mist)/0.45),0_1px_0_rgb(var(--shade)/0.35),0_8px_18px_-6px_rgb(var(--brass)/0.45)]',
+      'hover:from-brass-bright hover:via-brass hover:to-brass',
+      'active:from-brass active:via-brass-dim active:to-brass-dim',
+      'active:shadow-[inset_0_2px_4px_rgb(var(--shade)/0.35)]',
+      'disabled:from-brass-dim disabled:via-brass-dim disabled:to-brass-dim disabled:text-ink/50 disabled:shadow-none',
       'before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-1/2',
       'before:bg-gradient-to-b before:from-white/25 before:to-transparent',
     ].join(' '),
-  // Metal escuro com filete de latão — botão "gravado"
+  // Metal escuro com filete azure — botão "gravado"
   forged:
     [
-      'text-brass-bright border border-brass-dim/70',
+      'text-brass-bright border border-brass-dim/65',
       'bg-gradient-to-b from-panel2 via-panel to-ink',
-      'shadow-[inset_0_1px_0_rgba(201,166,107,0.18),0_1px_0_rgba(0,0,0,0.5)]',
-      'hover:border-brass hover:text-brass-bright hover:shadow-[inset_0_1px_0_rgba(224,192,138,0.28),0_0_0_1px_rgba(201,166,107,0.12)]',
-      'active:bg-ink active:shadow-[inset_0_2px_6px_rgba(0,0,0,0.55)]',
+      'shadow-[inset_0_1px_0_rgb(var(--brass)/0.22),inset_0_-1px_0_rgb(var(--shade)/0.25),0_1px_0_rgb(var(--shade)/0.4)]',
+      'hover:border-brass hover:text-brass-bright',
+      'hover:shadow-[inset_0_1px_0_rgb(var(--brass-bright)/0.3),0_0_0_1px_rgb(var(--brass)/0.14),0_0_20px_-6px_rgb(var(--brass)/0.35)]',
+      'active:bg-ink active:shadow-[inset_0_2px_6px_rgb(var(--shade)/0.55)]',
       'disabled:opacity-40',
     ].join(' '),
   // Primário com aura — uso pontual em CTA hero
   glow:
     [
-      'relative overflow-hidden text-ink border border-brass-bright/50',
-      'bg-gradient-to-br from-brass-bright via-brass to-[#9A7340]',
-      'shadow-[0_0_0_1px_rgba(201,166,107,0.25),0_0_24px_-4px_rgba(201,166,107,0.55),inset_0_1px_0_rgba(255,240,210,0.4)]',
-      'hover:shadow-[0_0_0_1px_rgba(224,192,138,0.4),0_0_32px_-2px_rgba(224,192,138,0.65),inset_0_1px_0_rgba(255,240,210,0.5)]',
-      'hover:from-[#F0D7A8] hover:via-brass-bright hover:to-brass',
-      'active:shadow-[0_0_0_1px_rgba(138,112,71,0.4),inset_0_2px_6px_rgba(0,0,0,0.35)]',
+      'relative overflow-hidden text-ink border border-brass-bright/45',
+      'bg-gradient-to-br from-brass-bright via-brass to-brass-dim',
+      'shadow-[0_0_0_1px_rgb(var(--brass)/0.22),0_0_28px_-4px_rgb(var(--brass)/0.5),inset_0_1px_0_rgb(var(--mist)/0.45)]',
+      'hover:shadow-[0_0_0_1px_rgb(var(--brass-bright)/0.38),0_0_36px_-2px_rgb(var(--brass-bright)/0.5),inset_0_1px_0_rgb(var(--mist)/0.55)]',
+      'hover:from-brass-bright hover:via-brass hover:to-brass',
+      'active:shadow-[0_0_0_1px_rgb(var(--brass-dim)/0.4),inset_0_2px_6px_rgb(var(--shade)/0.35)]',
       'disabled:opacity-40 disabled:shadow-none',
       'before:pointer-events-none before:absolute before:-left-1/2 before:top-0 before:h-full before:w-1/2',
-      'before:skew-x-[-20deg] before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent',
+      'before:skew-x-[-20deg] before:bg-gradient-to-r before:from-transparent before:via-white/28 before:to-transparent',
       'before:transition-transform before:duration-700 hover:before:translate-x-[220%]',
     ].join(' '),
 }
@@ -66,7 +67,7 @@ const sizeClasses: Record<Size, string> = {
 }
 
 // Button é a peça fundacional. Variantes gradient/forged/glow são a camada
-// "instrumentada" — metal fundido, filete gravado, CTA com aura de latão.
+// "instrumentada" — metal azure, filete gravado, CTA com aura fria.
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', loading, disabled, children, ...props }, ref) => {
     const premium = variant === 'gradient' || variant === 'forged' || variant === 'glow'

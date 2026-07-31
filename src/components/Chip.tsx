@@ -20,9 +20,9 @@ const toneIdle: Record<Tone, string> = {
 
 const toneSelected: Record<Tone, string> = {
   neutral:
-    'border-brass-dim text-ink bg-gradient-to-b from-brass-bright via-brass to-brass-dim shadow-[inset_0_1px_0_rgba(255,240,210,0.35)]',
+    'border-brass-dim text-ink bg-gradient-to-b from-brass-bright via-brass to-brass-dim shadow-[inset_0_1px_0_rgb(var(--mist)/0.35)]',
   brass:
-    'border-brass text-ink bg-gradient-to-b from-brass-bright via-brass to-brass-dim shadow-[inset_0_1px_0_rgba(255,240,210,0.35)]',
+    'border-brass text-ink bg-gradient-to-b from-brass-bright via-brass to-brass-dim shadow-[inset_0_1px_0_rgb(var(--mist)/0.35)]',
   verdigris: 'border-verdigris text-ink bg-gradient-to-b from-verdigris to-verdigris-dim',
   rust: 'border-rust text-vellum bg-gradient-to-b from-rust to-rust-dim',
 }

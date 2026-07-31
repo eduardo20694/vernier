@@ -44,7 +44,7 @@ export function FileDropzone({
       className={cn(
         'flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed px-6 py-10 text-center transition-all duration-200',
         over
-          ? 'border-brass bg-brass/10 shadow-[inset_0_0_0_1px_rgba(201,166,107,0.25)]'
+          ? 'border-brass bg-brass/10 shadow-[inset_0_0_0_1px_rgb(var(--brass)/0.25)]'
           : 'border-line bg-panel/40 hover:border-brass-dim/60 hover:bg-panel2/40',
         className
       )}

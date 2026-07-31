@@ -6,7 +6,7 @@ export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   ornate?: boolean
 }
 
-// Separador gravado. Com `ornate`, o label fica entre filetes de latão —
+// Separador gravado. Com `ornate`, o label fica entre filetes azure —
 // tipo placa de instrumento entre seções.
 export function Divider({ className, label, ornate = false, ...props }: DividerProps) {
   if (!label) {
