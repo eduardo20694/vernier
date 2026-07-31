@@ -8,6 +8,7 @@ import {
   Play,
   Power,
   RefreshCw,
+  Search,
   Server,
   Settings,
   Sparkles,
@@ -94,22 +95,7 @@ import { Banner } from '../components/Banner'
 import { CopyButton } from '../components/CopyButton'
 import { AspectRatio } from '../components/AspectRatio'
 import { Fieldset, Field } from '../components/Field'
-
-// Cada peça é apresentada dentro de um "quadro de ferramenta" (.shadow-board):
-// o contorno tracejado atrás mostra "aqui é o lugar dela", como um pegboard
-// de oficina. Isso é o elemento-assinatura da Vernier — usado só aqui na
-// vitrine, nunca dentro do componente em uso real num app de verdade.
-function Plate({ number, title, children }: { number: string; title: string; children: React.ReactNode }) {
-  return (
-    <section className="mb-14">
-      <div className="mb-4 flex items-baseline gap-3">
-        <span className="font-mono text-xs text-vellum-faint">Prancha {number}</span>
-        <h2 className="font-display text-xl text-vellum">{title}</h2>
-      </div>
-      <div className="shadow-board flex flex-wrap items-start gap-6 rounded-lg p-8">{children}</div>
-    </section>
-  )
-}
+import { CatalogShell, Plate } from './CatalogShell'
 
 function ToastDemo() {
   const { toast } = useToast()
@@ -169,15 +155,37 @@ function ShowcaseBody() {
   const [nav, setNav] = useState('painel')
 
   return (
-    <div className="min-h-screen bg-ink px-10 py-12">
-      <header className="mb-16 max-w-3xl">
-        <Overline>Catálogo de instrumentos</Overline>
-        <Display className="mt-3">Vernier</Display>
-        <Lead className="mt-4">
-          Biblioteca pessoal de componentes React — tipografia de site, peças de formulário,
-          navegação e painéis, todos no mesmo metal.
-        </Lead>
-      </header>
+    <>
+      <section id="topo" className="relative mb-14 overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-panel2 via-panel to-ink p-8 sm:p-12 shadow-plate">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-brass/15 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-24 left-1/3 h-48 w-48 rounded-full bg-verdigris/10 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brass-bright/50 to-transparent"
+        />
+
+        <div className="relative max-w-2xl">
+          <Overline>Catálogo de instrumentos</Overline>
+          <Display className="mt-3">Vernier</Display>
+          <Lead className="mt-5">
+            Cada peça no seu lugar — tipografia de site, formulários, overlays e instrumentos
+            de painel. Use a busca ou os filtros do header pra achar qualquer prancha.
+          </Lead>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Button variant="gradient" size="sm" onClick={() => document.getElementById('catalog-search')?.focus()}>
+              <Search className="h-3.5 w-3.5" />
+              Filtrar peças
+            </Button>
+            <Caption className="m-0">ou pressione <Kbd className="mx-1">/</Kbd> em qualquer lugar</Caption>
+          </div>
+        </div>
+      </section>
 
       <Plate number="00" title="Tipografia">
         <Stack gap="lg" className="w-full max-w-2xl">
@@ -836,7 +844,7 @@ function ShowcaseBody() {
           </Field>
         </Fieldset>
       </Plate>
-    </div>
+    </>
   )
 }
 
@@ -844,7 +852,9 @@ export default function Showcase() {
   return (
     <TooltipProvider>
       <ToastProvider>
-        <ShowcaseBody />
+        <CatalogShell>
+          <ShowcaseBody />
+        </CatalogShell>
       </ToastProvider>
     </TooltipProvider>
   )
