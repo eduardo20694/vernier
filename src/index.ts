@@ -21,8 +21,38 @@ export {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
+  DropdownMenuLabel,
 } from './components/DropdownMenu'
-export { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from './components/Dialog'
+export {
+  Dialog,
+  DialogTrigger,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from './components/Dialog'
+export {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from './components/AlertDialog'
+export { FormDialog } from './components/FormDialog'
+export { CommandPalette, type CommandItem } from './components/CommandPalette'
+export {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuLabel,
+} from './components/ContextMenu'
 export {
   Sheet,
   SheetTrigger,
@@ -33,6 +63,9 @@ export {
 } from './components/Sheet'
 export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from './components/Table'
 export { Sidebar, type SidebarItem } from './components/Sidebar'
+export { SidebarNav, type NavSection } from './components/SidebarNav'
+export { TopNav, AppShell } from './components/AppShell'
+export { FormCard, LoginForm, SettingsForm } from './components/Forms'
 export {
   Select,
   SelectGroup,

@@ -77,6 +77,13 @@ export const PLATES: PlateMeta[] = [
   { number: '42', title: 'Código & Hover', category: 'dados', keywords: 'code hover' },
   { number: '43', title: 'Scroll & Aspect', category: 'layout', keywords: 'scroll aspect' },
   { number: '44', title: 'Fieldset', category: 'forms', keywords: 'fieldset field' },
+  { number: '45', title: 'Modais avançados', category: 'overlay', keywords: 'dialog alert form modal confirm' },
+  { number: '46', title: 'Command palette', category: 'overlay', keywords: 'command palette cmdk busca' },
+  { number: '47', title: 'Context menu', category: 'overlay', keywords: 'context menu botão direito' },
+  { number: '48', title: 'App shell', category: 'nav', keywords: 'appshell sidebar topnav layout' },
+  { number: '49', title: 'Formulário login', category: 'forms', keywords: 'login form auth' },
+  { number: '50', title: 'Formulário settings', category: 'forms', keywords: 'settings preferências form' },
+  { number: '51', title: 'Sheet formulário', category: 'overlay', keywords: 'sheet drawer form lateral' },
 ]
 
 export const TOTAL_PLATES = PLATES.length

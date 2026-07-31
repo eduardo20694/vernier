@@ -43,3 +43,15 @@ export function DropdownMenuItem({
 export function DropdownMenuSeparator({ className, ...props }: React.ComponentPropsWithoutRef<typeof DropdownPrimitive.Separator>) {
   return <DropdownPrimitive.Separator className={cn('my-1 h-px bg-line', className)} {...props} />
 }
+
+export function DropdownMenuLabel({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof DropdownPrimitive.Label>) {
+  return (
+    <DropdownPrimitive.Label
+      className={cn('px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-vellum-faint', className)}
+      {...props}
+    />
+  )
+}

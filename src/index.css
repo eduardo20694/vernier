@@ -112,13 +112,12 @@ body {
   border: 1px solid #3A342C;
 }
 
-/* Ambiente da vitrine — madeira/tinta com vinhetas de latão */
+/* Ambiente da vitrine — madeira escura, sem cast amarelo em tudo */
 .catalog-ambient {
   background:
-    radial-gradient(ellipse 80% 50% at 10% -10%, rgba(201, 166, 107, 0.12), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(94, 140, 122, 0.06), transparent 50%),
-    radial-gradient(ellipse 50% 60% at 50% 100%, rgba(27, 24, 21, 0.9), transparent 70%),
-    linear-gradient(180deg, #1B1815 0%, #201c18 40%, #1B1815 100%);
+    radial-gradient(ellipse 70% 45% at 8% -8%, rgba(44, 40, 34, 0.9), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 92% 8%, rgba(94, 140, 122, 0.04), transparent 50%),
+    linear-gradient(180deg, #1B1815 0%, #1E1B17 45%, #1B1815 100%);
 }
 
 .catalog-plate {

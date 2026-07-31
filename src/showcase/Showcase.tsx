@@ -3,6 +3,7 @@ import {
   Activity,
   Box,
   ChevronDown,
+  FileText,
   Gauge as GaugeIcon,
   Layers,
   Play,
@@ -35,9 +36,34 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
+  DropdownMenuLabel,
 } from '../components/DropdownMenu'
-import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from '../components/Dialog'
-import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from '../components/Sheet'
+import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogHeader, DialogFooter, DialogClose } from '../components/Dialog'
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from '../components/AlertDialog'
+import { FormDialog } from '../components/FormDialog'
+import { CommandPalette } from '../components/CommandPalette'
+import {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuLabel,
+} from '../components/ContextMenu'
+import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription, SheetClose } from '../components/Sheet'
+import { SidebarNav } from '../components/SidebarNav'
+import { TopNav, AppShell } from '../components/AppShell'
+import { LoginForm, SettingsForm } from '../components/Forms'
+import { Navbar, NavLink } from '../components/Navbar'
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../components/Table'
 import { Sidebar } from '../components/Sidebar'
 import {
@@ -86,7 +112,6 @@ import { HoverCard, HoverCardTrigger, HoverCardContent } from '../components/Hov
 import { ScrollArea } from '../components/ScrollArea'
 import { FileDropzone } from '../components/FileDropzone'
 import { Stepper } from '../components/Stepper'
-import { Navbar, NavLink } from '../components/Navbar'
 import { Stack } from '../components/Layout'
 import { Link } from '../components/Link'
 import { Blockquote } from '../components/Blockquote'
@@ -153,21 +178,16 @@ function ShowcaseBody() {
   const [replicas, setReplicas] = useState(3)
   const [plan, setPlan] = useState('pro')
   const [nav, setNav] = useState('painel')
+  const [cmdOpen, setCmdOpen] = useState(false)
+  const [shellNav, setShellNav] = useState('painel')
+  const [topSearch, setTopSearch] = useState('')
 
   return (
     <>
-      <section id="topo" className="relative mb-14 overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-panel2 via-panel to-ink p-8 sm:p-12 shadow-plate">
+      <section id="topo" className="relative mb-14 overflow-hidden rounded-2xl border border-line bg-panel p-8 sm:p-12 shadow-plate">
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-brass/15 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-24 left-1/3 h-48 w-48 rounded-full bg-verdigris/10 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brass-bright/50 to-transparent"
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-line to-transparent"
         />
 
         <div className="relative max-w-2xl">
@@ -178,7 +198,7 @@ function ShowcaseBody() {
             de painel. Use a busca ou os filtros do header pra achar qualquer prancha.
           </Lead>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button variant="gradient" size="sm" onClick={() => document.getElementById('catalog-search')?.focus()}>
+            <Button variant="secondary" size="sm" onClick={() => document.getElementById('catalog-search')?.focus()}>
               <Search className="h-3.5 w-3.5" />
               Filtrar peças
             </Button>
@@ -190,7 +210,7 @@ function ShowcaseBody() {
       <Plate number="00" title="Tipografia">
         <Stack gap="lg" className="w-full max-w-2xl">
           <div>
-            <Overline>Overline · Space Mono</Overline>
+            <Overline tone="brass">Overline · Space Mono</Overline>
             <Display size="sm" className="mt-2">
               Display em Fraunces
             </Display>
@@ -843,6 +863,240 @@ function ShowcaseBody() {
             <Input defaultValue="••••••••" />
           </Field>
         </Fieldset>
+      </Plate>
+
+      <Plate number="45" title="Modais avançados">
+        <div className="flex flex-wrap gap-3">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="secondary">Modal grande</Button>
+            </DialogTrigger>
+            <DialogContent size="xl">
+              <DialogHeader>
+                <DialogTitle>Detalhes do incidente</DialogTitle>
+                <DialogDescription>Timeline completa do último failover.</DialogDescription>
+              </DialogHeader>
+              <Text size="sm" tone="muted">
+                O nó web-02 ficou sem healthcheck por 47s. O balancer removeu o target e o
+                traffic voltou em 12s via web-01 e web-03.
+              </Text>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button variant="ghost">Fechar</Button>
+                </DialogClose>
+                <Button variant="gradient">Abrir runbook</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="danger">Confirmar exclusão</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogTitle>Apagar snapshot?</AlertDialogTitle>
+              <AlertDialogDescription>
+                Essa ação remove o arquivo de /var/backups e não pode ser desfeita.
+              </AlertDialogDescription>
+              <AlertDialogFooter>
+                <AlertDialogCancel asChild>
+                  <Button variant="ghost">Cancelar</Button>
+                </AlertDialogCancel>
+                <AlertDialogAction asChild>
+                  <Button variant="danger">Apagar agora</Button>
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+
+          <FormDialog
+            trigger={<Button variant="gradient">Novo servidor</Button>}
+            title="Adicionar servidor"
+            description="Conecta um host SSH na bancada."
+            confirmLabel="Conectar"
+          >
+            <Input label="Hostname" placeholder="web-04.prod.local" />
+            <Input label="Usuário" defaultValue="deploy" />
+            <Select defaultValue="sa-east-1">
+              <SelectTrigger>
+                <SelectValue placeholder="Região" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="sa-east-1">São Paulo</SelectItem>
+                <SelectItem value="us-east-1">N. Virginia</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormDialog>
+        </div>
+      </Plate>
+
+      <Plate number="46" title="Command palette">
+        <Button variant="forged" onClick={() => setCmdOpen(true)}>
+          Abrir command <Kbd className="ml-1">⌘</Kbd>
+          <Kbd>K</Kbd>
+        </Button>
+        <CommandPalette
+          open={cmdOpen}
+          onOpenChange={setCmdOpen}
+          items={[
+            {
+              id: 'deploy',
+              label: 'Deploy produção',
+              group: 'Ações',
+              hint: '⇧D',
+              icon: <Play className="h-4 w-4" />,
+            },
+            {
+              id: 'logs',
+              label: 'Abrir logs',
+              group: 'Ações',
+              hint: 'L',
+              icon: <FileText className="h-4 w-4" />,
+            },
+            {
+              id: 'settings',
+              label: 'Preferências',
+              group: 'Navegação',
+              icon: <Settings className="h-4 w-4" />,
+            },
+            {
+              id: 'servers',
+              label: 'Servidores',
+              group: 'Navegação',
+              icon: <Server className="h-4 w-4" />,
+            },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="47" title="Context menu">
+        <ContextMenu>
+          <ContextMenuTrigger asChild>
+            <div className="flex h-28 w-72 cursor-context-menu items-center justify-center rounded-lg border border-dashed border-line bg-panel2/40 text-sm text-vellum-muted">
+              Clique com o botão direito aqui
+            </div>
+          </ContextMenuTrigger>
+          <ContextMenuContent>
+            <ContextMenuLabel>Arquivo</ContextMenuLabel>
+            <ContextMenuItem>Abrir</ContextMenuItem>
+            <ContextMenuItem>Duplicar</ContextMenuItem>
+            <ContextMenuSeparator />
+            <ContextMenuItem className="text-rust">Remover</ContextMenuItem>
+          </ContextMenuContent>
+        </ContextMenu>
+      </Plate>
+
+      <Plate number="48" title="App shell">
+        <AppShell
+          className="w-full max-w-4xl"
+          sidebar={
+            <SidebarNav
+              brand={
+                <>
+                  <GaugeIcon className="h-4 w-4 shrink-0 text-brass-bright" />
+                  <span data-sidebar-label className="truncate text-base">
+                    Dockwatch
+                  </span>
+                </>
+              }
+              activeId={shellNav}
+              onNavigate={setShellNav}
+              sections={[
+                {
+                  title: 'Operação',
+                  items: [
+                    { id: 'painel', label: 'Painel', icon: <Layers /> },
+                    { id: 'servidores', label: 'Servidores', icon: <Server />, badge: '12' },
+                    { id: 'logs', label: 'Logs', icon: <FileText /> },
+                  ],
+                },
+                {
+                  title: 'Sistema',
+                  items: [{ id: 'config', label: 'Config', icon: <Settings /> }],
+                },
+              ]}
+              footer="v0.1 · local"
+            />
+          }
+          topbar={
+            <TopNav
+              brand={<span className="text-sm text-vellum-muted">sa-east-1</span>}
+              search={topSearch}
+              onSearch={setTopSearch}
+              actions={
+                <>
+                  <Button size="sm" variant="ghost">
+                    Docs
+                  </Button>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button size="sm" variant="secondary">
+                        Conta ▾
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuLabel>Sessão</DropdownMenuLabel>
+                      <DropdownMenuItem>Perfil</DropdownMenuItem>
+                      <DropdownMenuItem>API keys</DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem className="text-rust">Sair</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                  <Avatar fallback="ER" size="sm" />
+                </>
+              }
+            />
+          }
+        >
+          <Overline>área de conteúdo</Overline>
+          <Heading level={3} className="mt-2">
+            {shellNav}
+          </Heading>
+          <Text size="sm" tone="muted" className="mt-2">
+            Shell completo: sidebar recolhível + topnav com busca e menu de conta.
+          </Text>
+        </AppShell>
+      </Plate>
+
+      <Plate number="49" title="Formulário login">
+        <LoginForm />
+      </Plate>
+
+      <Plate number="50" title="Formulário settings">
+        <SettingsForm />
+      </Plate>
+
+      <Plate number="51" title="Sheet formulário">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="gradient">Editar no drawer</Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="flex flex-col">
+            <SheetTitle>Editar serviço</SheetTitle>
+            <SheetDescription>Alterações aplicadas no próximo rollout.</SheetDescription>
+            <div className="mt-6 flex-1 space-y-4">
+              <Input label="Nome" defaultValue="api-gateway" />
+              <Input label="Imagem" defaultValue="ghcr.io/org/api:1.4.2" />
+              <Textarea label="Notas" placeholder="Changelog do serviço…" />
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-vellum-muted">Autoscale</span>
+                <Switch defaultChecked />
+              </div>
+            </div>
+            <div className="mt-6 flex gap-2 border-t border-line pt-4">
+              <SheetClose asChild>
+                <Button variant="ghost" className="flex-1">
+                  Cancelar
+                </Button>
+              </SheetClose>
+              <SheetClose asChild>
+                <Button variant="gradient" className="flex-1">
+                  Salvar
+                </Button>
+              </SheetClose>
+            </div>
+          </SheetContent>
+        </Sheet>
       </Plate>
     </>
   )

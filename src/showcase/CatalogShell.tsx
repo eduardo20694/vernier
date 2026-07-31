@@ -61,13 +61,13 @@ export function CatalogShell({ children }: { children: ReactNode }) {
           <div className="absolute inset-0 bg-ink/80 backdrop-blur-xl" />
           <div
             aria-hidden
-            className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brass/50 to-transparent"
+            className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-line to-transparent"
           />
 
           <div className="relative mx-auto flex max-w-[1400px] flex-col gap-4 px-5 py-4 sm:px-8 lg:px-10">
             <div className="flex flex-wrap items-center gap-4">
               <a href="#topo" className="flex items-center gap-3 rounded-sm focus-ring">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-brass-dim/50 bg-gradient-to-b from-brass/20 to-transparent text-brass shadow-brass">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-panel2 text-brass-bright">
                   <Gauge className="h-4 w-4" />
                 </div>
                 <div>
@@ -79,7 +79,7 @@ export function CatalogShell({ children }: { children: ReactNode }) {
               </a>
 
               <div className="ml-auto flex items-center gap-3">
-                <Badge tone="brass" className="hidden sm:inline-flex">
+                <Badge tone="neutral" className="hidden sm:inline-flex">
                   {visibleCount} / {TOTAL_PLATES}
                 </Badge>
                 <div className="hidden items-center gap-1.5 text-xs text-vellum-faint md:flex">
@@ -110,8 +110,8 @@ export function CatalogShell({ children }: { children: ReactNode }) {
                       className={cn(
                         'shrink-0 rounded-full border px-3 py-1.5 text-xs font-medium transition-all duration-150 focus-ring',
                         active
-                          ? 'border-brass bg-gradient-to-b from-brass-bright via-brass to-brass-dim text-ink shadow-[inset_0_1px_0_rgba(255,240,210,0.35)]'
-                          : 'border-line bg-panel2/60 text-vellum-muted hover:border-brass-dim/50 hover:text-vellum'
+                          ? 'border-brass-dim/80 bg-brass/10 text-brass-bright'
+                          : 'border-line bg-panel2/60 text-vellum-muted hover:border-line hover:text-vellum'
                       )}
                     >
                       {c.label}
@@ -179,27 +179,19 @@ export function Plate({
           <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-brass-dim">
             Prancha {number}
           </span>
-          <h2 className="font-display text-2xl text-vellum transition-colors duration-200 group-hover:text-brass-bright">
+          <h2 className="font-display text-2xl text-vellum">
             {title}
           </h2>
         </div>
         <a
           href={`#${id}`}
-          className="font-mono text-[10px] uppercase tracking-widest text-vellum-faint opacity-0 transition-opacity hover:text-brass group-hover:opacity-100 focus:opacity-100"
+          className="font-mono text-[10px] uppercase tracking-widest text-vellum-faint opacity-0 transition-opacity hover:text-vellum group-hover:opacity-100 focus:opacity-100"
         >
           #{number}
         </a>
       </div>
 
-      <div className="relative overflow-hidden rounded-xl border border-line bg-gradient-to-b from-panel2/80 via-panel/90 to-ink/50 p-6 shadow-plate sm:p-8">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brass/40 to-transparent"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-16 -top-20 h-44 w-44 rounded-full bg-brass/[0.07] blur-3xl"
-        />
+      <div className="relative overflow-hidden rounded-xl border border-line bg-panel p-6 shadow-plate sm:p-8">
         <div className="shadow-board relative flex flex-wrap items-start gap-6">{children}</div>
       </div>
     </section>

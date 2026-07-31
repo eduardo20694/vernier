@@ -98,7 +98,7 @@ export function Caption({
 
 export function Overline({
   className,
-  tone = 'brass',
+  tone = 'faint',
   ...props
 }: HTMLAttributes<HTMLParagraphElement> & { tone?: Tone }) {
   return (
