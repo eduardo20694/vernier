@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import {
   Activity,
+  AlignLeft,
+  Bold,
   Box,
   ChevronDown,
   FileText,
   Gauge as GaugeIcon,
+  Italic,
   Layers,
   Play,
   Power,
@@ -120,6 +123,28 @@ import { Banner } from '../components/Banner'
 import { CopyButton } from '../components/CopyButton'
 import { AspectRatio } from '../components/AspectRatio'
 import { Fieldset, Field } from '../components/Field'
+import { Footer } from '../components/Footer'
+import { Hero } from '../components/Hero'
+import { PricingCards } from '../components/PricingCards'
+import { ErrorPage } from '../components/ErrorPage'
+import { CookieBanner } from '../components/CookieBanner'
+import { MobileNav } from '../components/MobileNav'
+import { Wizard } from '../components/Wizard'
+import { Combobox } from '../components/Combobox'
+import { Calendar } from '../components/Calendar'
+import { DataTable } from '../components/DataTable'
+import {
+  MenubarMenu,
+  MenubarBar,
+  MenubarTriggerBtn,
+  MenubarContent,
+  MenubarItem,
+  MenubarSeparator,
+  MenubarLabel,
+} from '../components/Menubar'
+import { OtpInput } from '../components/OtpInput'
+import { Toggle, ToggleGroupItem, ToggleGroupBar } from '../components/ToggleGroup'
+import { Carousel } from '../components/Carousel'
 import { CatalogShell, Plate } from './CatalogShell'
 
 function ToastDemo() {
@@ -181,6 +206,11 @@ function ShowcaseBody() {
   const [cmdOpen, setCmdOpen] = useState(false)
   const [shellNav, setShellNav] = useState('painel')
   const [topSearch, setTopSearch] = useState('')
+  const [combo, setCombo] = useState('sa-east-1')
+  const [date, setDate] = useState<Date | undefined>(new Date())
+  const [otp, setOtp] = useState('')
+  const [align, setAlign] = useState('left')
+  const [showCookie, setShowCookie] = useState(false)
 
   return (
     <>
@@ -1097,6 +1127,262 @@ function ShowcaseBody() {
             </div>
           </SheetContent>
         </Sheet>
+      </Plate>
+
+      <Plate number="52" title="Footer">
+        <Footer
+          className="w-full max-w-4xl overflow-hidden rounded-xl"
+          brand="Vernier"
+          tagline="Componentes de precisão pra Dockwatch, Rowkeeper e o que vier."
+          columns={[
+            {
+              title: 'Produto',
+              links: [
+                { label: 'Catálogo', href: '#' },
+                { label: 'Changelog', href: '#' },
+              ],
+            },
+            {
+              title: 'Empresa',
+              links: [
+                { label: 'Sobre', href: '#' },
+                { label: 'Contato', href: '#' },
+              ],
+            },
+            {
+              title: 'Legal',
+              links: [
+                { label: 'Privacidade', href: '#' },
+                { label: 'Termos', href: '#' },
+              ],
+            },
+          ]}
+          legal={`© ${new Date().getFullYear()} Vernier · MIT`}
+        />
+      </Plate>
+
+      <Plate number="53" title="Hero">
+        <Hero
+          className="w-full max-w-4xl"
+          eyebrow="Instrumentação visual"
+          title={
+            <>
+              A bancada pronta
+              <br />
+              pro seu próximo painel
+            </>
+          }
+          description="Tipografia, forms, overlays e shells — tudo no mesmo metal, pronto pra copiar pro Dockwatch."
+          primaryAction={{ label: 'Ver catálogo' }}
+          secondaryAction={{ label: 'GitHub' }}
+          media={
+            <div className="flex h-full min-h-[220px] items-center justify-center rounded-xl border border-line bg-panel2/50">
+              <Gauge value={72} label="pronto" tone="brass" />
+            </div>
+          }
+        />
+      </Plate>
+
+      <Plate number="54" title="Pricing">
+        <PricingCards
+          className="w-full max-w-4xl"
+          plans={[
+            {
+              id: 'starter',
+              name: 'Starter',
+              price: 'R$0',
+              period: '/mês',
+              description: 'Pra protótipos locais.',
+              features: ['1 cluster', 'Logs 7 dias', 'Comunidade'],
+              cta: 'Começar',
+            },
+            {
+              id: 'pro',
+              name: 'Pro',
+              price: 'R$89',
+              period: '/mês',
+              description: 'Pra operação diária.',
+              features: ['5 clusters', 'Alertas Slack', 'SSO'],
+              cta: 'Assinar Pro',
+              highlighted: true,
+            },
+            {
+              id: 'scale',
+              name: 'Scale',
+              price: 'Custom',
+              description: 'Pra frota grande.',
+              features: ['Ilimitado', 'SLA 99.9%', 'Suporte dedicado'],
+              cta: 'Falar com vendas',
+            },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="55" title="Combobox">
+        <Combobox
+          value={combo}
+          onChange={setCombo}
+          options={[
+            { value: 'sa-east-1', label: 'São Paulo' },
+            { value: 'us-east-1', label: 'N. Virginia' },
+            { value: 'eu-west-1', label: 'Irlanda' },
+            { value: 'ap-south-1', label: 'Mumbai' },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="56" title="Calendário">
+        <Calendar value={date} onChange={setDate} />
+        <Caption>
+          Selecionado:{' '}
+          {date ? date.toLocaleDateString('pt-BR') : '—'}
+        </Caption>
+      </Plate>
+
+      <Plate number="57" title="Data table">
+        <DataTable
+          className="w-full max-w-3xl"
+          columns={[
+            { key: 'name', header: 'Servidor' },
+            { key: 'region', header: 'Região' },
+            { key: 'cpu', header: 'CPU %', numeric: true },
+          ]}
+          rows={[
+            { id: '1', name: 'web-01', region: 'sa-east-1', cpu: 12 },
+            { id: '2', name: 'web-02', region: 'sa-east-1', cpu: 48 },
+            { id: '3', name: 'db-01', region: 'us-east-1', cpu: 71 },
+            { id: '4', name: 'cache-01', region: 'eu-west-1', cpu: 9 },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="58" title="Mobile nav">
+        <MobileNav
+          className="w-full max-w-sm overflow-hidden rounded-xl"
+          brand="Vernier"
+          links={[
+            { label: 'Catálogo', href: '#topo' },
+            { label: 'Preços', href: '#plate-54' },
+            { label: 'Docs', href: '#' },
+          ]}
+          actions={<Button variant="gradient" className="w-full">Entrar</Button>}
+        />
+      </Plate>
+
+      <Plate number="59" title="Menubar">
+        <MenubarBar>
+          <MenubarMenu>
+            <MenubarTriggerBtn>Arquivo</MenubarTriggerBtn>
+            <MenubarContent>
+              <MenubarItem>Novo</MenubarItem>
+              <MenubarItem>Abrir…</MenubarItem>
+              <MenubarSeparator />
+              <MenubarItem>Sair</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+          <MenubarMenu>
+            <MenubarTriggerBtn>Editar</MenubarTriggerBtn>
+            <MenubarContent>
+              <MenubarLabel>Área de transferência</MenubarLabel>
+              <MenubarItem>Copiar</MenubarItem>
+              <MenubarItem>Colar</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+          <MenubarMenu>
+            <MenubarTriggerBtn>Ver</MenubarTriggerBtn>
+            <MenubarContent>
+              <MenubarItem>Zoom +</MenubarItem>
+              <MenubarItem>Zoom −</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+        </MenubarBar>
+      </Plate>
+
+      <Plate number="60" title="OTP">
+        <div>
+          <Caption className="mb-3">Código de verificação</Caption>
+          <OtpInput value={otp} onChange={setOtp} />
+        </div>
+      </Plate>
+
+      <Plate number="61" title="Toggle group">
+        <Toggle aria-label="Negrito">
+          <Bold className="h-4 w-4" />
+        </Toggle>
+        <Toggle aria-label="Itálico">
+          <Italic className="h-4 w-4" />
+        </Toggle>
+        <ToggleGroupBar type="single" value={align} onValueChange={(v) => v && setAlign(v)}>
+          <ToggleGroupItem value="left" aria-label="Esquerda">
+            <AlignLeft className="h-4 w-4" />
+          </ToggleGroupItem>
+          <ToggleGroupItem value="center" aria-label="Centro">
+            Centro
+          </ToggleGroupItem>
+          <ToggleGroupItem value="right" aria-label="Direita">
+            Direita
+          </ToggleGroupItem>
+        </ToggleGroupBar>
+      </Plate>
+
+      <Plate number="62" title="Carousel">
+        <Carousel
+          slides={[
+            {
+              id: '1',
+              content: (
+                <div className="pb-10 text-center">
+                  <Heading level={3}>Deploy em um clique</Heading>
+                  <Text tone="muted" className="mx-auto mt-2">
+                    Publique nós com a mesma calibração visual da Vernier.
+                  </Text>
+                </div>
+              ),
+            },
+            {
+              id: '2',
+              content: (
+                <div className="pb-10 text-center">
+                  <Heading level={3}>Observabilidade limpa</Heading>
+                  <Text tone="muted" className="mx-auto mt-2">
+                    Gauges, stats e timelines no mesmo metal.
+                  </Text>
+                </div>
+              ),
+            },
+            {
+              id: '3',
+              content: (
+                <div className="pb-10 text-center">
+                  <Heading level={3}>Pronto pro Dockwatch</Heading>
+                  <Text tone="muted" className="mx-auto mt-2">
+                    Copie as pranchas e siga a bancada.
+                  </Text>
+                </div>
+              ),
+            },
+          ]}
+        />
+      </Plate>
+
+      <Plate number="63" title="Cookie banner">
+        <Button variant="secondary" onClick={() => setShowCookie(true)}>
+          Mostrar consentimento
+        </Button>
+        {showCookie && (
+          <CookieBanner
+            onAccept={() => setShowCookie(false)}
+            onReject={() => setShowCookie(false)}
+          />
+        )}
+      </Plate>
+
+      <Plate number="64" title="Error page">
+        <ErrorPage className="w-full max-w-xl" code="404" />
+      </Plate>
+
+      <Plate number="65" title="Wizard">
+        <Wizard />
       </Plate>
     </>
   )

@@ -10,13 +10,9 @@ Cada um dos seus projetos de infra tem sua própria identidade visual: o Dockwat
 
 **Elemento-assinatura:** cada componente na vitrine (`npm run dev`) aparece dentro de um "quadro de ferramenta" — o contorno tracejado atrás, como um pegboard de oficina que mostra "aqui é o lugar desta peça".
 
-## O que já tem (~55 peças)
+## O que já tem (~65 pranchas)
 
-**Tipografia de site:** Display, Heading 1–4, Lead, Text, Caption, Overline, InlineCode, Prose, Blockquote, Link — escala completa em `tokens.json` (Fraunces + General Sans + Space Mono, optical sizing, measure ~65ch).
-
-**UI completa:** botões (gradient/forged/glow), formulários (Input, Textarea, Password, Search, Number, Radio, Fieldset), overlays (Dialog, Sheet, Popover, HoverCard, Toast), navegação (Navbar, Sidebar, Tabs, Breadcrumb, Stepper, Pagination), dados (Table, Stat, Gauge, Timeline, CodeBlock), feedback (Alert, Banner, Spinner, Skeleton, EmptyState, Progress) e mais.
-
-Radix UI onde faz sentido; Tailwind com tokens, glows e metal fundido.
+Kit completo pra app + site: tipografia, forms (incl. Combobox, Calendar, OTP, Wizard), overlays (modais, sheet, command, context), navegação (navbar, mobile nav, menubar, app shell), marketing (Hero, Pricing, Footer, Carousel, Error page, Cookie), dados (DataTable com sort/filter/select) e instrumentos (Gauge, Stat).
 
 ## Rodando a vitrine
 
@@ -33,10 +29,10 @@ Já que é uso pessoal (não vai virar pacote publicado), o caminho mais simples
 
 ## Próximas pranchas (ainda não construídas)
 
-- Combobox / Command palette
-- Date / Calendar
-- Menubar / Context menu
-- Data table com sort/filter
+- Tree view
+- Color picker
+- Charts (via lib dedicada)
+- Rich text editor
 
 ## Servidor MCP
 

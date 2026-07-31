@@ -84,6 +84,20 @@ export const PLATES: PlateMeta[] = [
   { number: '49', title: 'Formulário login', category: 'forms', keywords: 'login form auth' },
   { number: '50', title: 'Formulário settings', category: 'forms', keywords: 'settings preferências form' },
   { number: '51', title: 'Sheet formulário', category: 'overlay', keywords: 'sheet drawer form lateral' },
+  { number: '52', title: 'Footer', category: 'layout', keywords: 'footer rodapé' },
+  { number: '53', title: 'Hero', category: 'layout', keywords: 'hero landing' },
+  { number: '54', title: 'Pricing', category: 'layout', keywords: 'pricing planos cards' },
+  { number: '55', title: 'Combobox', category: 'forms', keywords: 'combobox autocomplete busca' },
+  { number: '56', title: 'Calendário', category: 'forms', keywords: 'calendar date picker data' },
+  { number: '57', title: 'Data table', category: 'dados', keywords: 'datatable sort filter select' },
+  { number: '58', title: 'Mobile nav', category: 'nav', keywords: 'mobile menu hamburger' },
+  { number: '59', title: 'Menubar', category: 'nav', keywords: 'menubar menu barra' },
+  { number: '60', title: 'OTP', category: 'forms', keywords: 'otp pin 2fa verificação' },
+  { number: '61', title: 'Toggle group', category: 'acoes', keywords: 'toggle group ícone' },
+  { number: '62', title: 'Carousel', category: 'layout', keywords: 'carousel slider' },
+  { number: '63', title: 'Cookie banner', category: 'feedback', keywords: 'cookie consent lgpd' },
+  { number: '64', title: 'Error page', category: 'feedback', keywords: '404 500 error' },
+  { number: '65', title: 'Wizard', category: 'forms', keywords: 'wizard multi-step fluxo' },
 ]
 
 export const TOTAL_PLATES = PLATES.length

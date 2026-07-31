@@ -121,4 +121,27 @@ export { CodeBlock } from './components/CodeBlock'
 export { Banner } from './components/Banner'
 export { CopyButton } from './components/CopyButton'
 export { AspectRatio } from './components/AspectRatio'
+export { Footer, type FooterColumn, type FooterLink } from './components/Footer'
+export { Hero } from './components/Hero'
+export { PricingCards, type PricingPlan } from './components/PricingCards'
+export { ErrorPage } from './components/ErrorPage'
+export { CookieBanner } from './components/CookieBanner'
+export { MobileNav, type MobileNavLink } from './components/MobileNav'
+export { Wizard } from './components/Wizard'
+export { Combobox, type ComboboxOption } from './components/Combobox'
+export { Calendar } from './components/Calendar'
+export { DataTable, type DataColumn } from './components/DataTable'
+export {
+  Menubar,
+  MenubarMenu,
+  MenubarBar,
+  MenubarTriggerBtn,
+  MenubarContent,
+  MenubarItem,
+  MenubarSeparator,
+  MenubarLabel,
+} from './components/Menubar'
+export { OtpInput } from './components/OtpInput'
+export { Toggle, ToggleGroup, ToggleGroupItem, ToggleGroupBar } from './components/ToggleGroup'
+export { Carousel, type CarouselSlide } from './components/Carousel'
 export { cn } from './lib/cn'
