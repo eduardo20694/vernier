@@ -12,6 +12,9 @@
 .light {
   color-scheme: light;
 
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "General Sans", "Segoe UI", system-ui, sans-serif;
+
   --ink: 247 249 253;
   --panel: 238 242 248;
   --panel2: 226 233 243;
@@ -72,10 +75,10 @@
     radial-gradient(ellipse 40% 35% at 55% 45%, rgb(var(--mist) / 0.55), transparent 70%),
     linear-gradient(165deg, rgb(250 252 255) 0%, rgb(238 242 248) 48%, rgb(226 233 243) 100%);
 
-  --catalog-header-bg: linear-gradient(
-    180deg,
-    rgb(247 249 253 / 0.88) 0%,
-    rgb(247 249 253 / 0.72) 100%
+  --catalog-sidebar-bg: linear-gradient(
+    90deg,
+    rgb(247 249 253 / 0.92) 0%,
+    rgb(247 249 253 / 0.78) 100%
   );
   --plate-face-bg:
     linear-gradient(180deg, rgb(var(--mist) / 0.9) 0%, transparent 32%),
@@ -171,10 +174,10 @@
       rgb(22 32 51) 100%
     );
 
-  --catalog-header-bg: linear-gradient(
-    180deg,
-    rgb(5 10 20 / 0.94) 0%,
-    rgb(7 13 24 / 0.82) 100%
+  --catalog-sidebar-bg: linear-gradient(
+    90deg,
+    rgb(5 10 20 / 0.96) 0%,
+    rgb(7 13 24 / 0.84) 100%
   );
   --plate-face-bg:
     linear-gradient(180deg, rgb(var(--mist) / 0.055) 0%, transparent 28%),
@@ -206,19 +209,6 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Soft crossfade when day/night flips */
-  transition: background-color 380ms ease, color 380ms ease;
-}
-
-html.theme-switching,
-html.theme-switching * {
-  transition:
-    background-color 380ms ease,
-    border-color 380ms ease,
-    color 280ms ease,
-    box-shadow 380ms ease,
-    fill 380ms ease,
-    stroke 380ms ease !important;
 }
 
 body {
@@ -326,10 +316,6 @@ body {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
-  }
-  html.theme-switching,
-  html.theme-switching * {
-    transition: none !important;
   }
 }
 
@@ -699,7 +685,7 @@ body {
   }
 }
 
-/* Título da prancha — número gravado + Fraunces */
+/* Título da prancha — número gravado + display var */
 .plate-number {
   font-family: "Space Mono", ui-monospace, monospace;
   font-size: 0.6875rem;
@@ -711,7 +697,7 @@ body {
 }
 
 .plate-title {
-  font-family: Fraunces, Georgia, serif;
+  font-family: var(--font-display);
   font-optical-sizing: auto;
   font-weight: 500;
   font-size: 1.5rem;
@@ -755,28 +741,59 @@ body {
     0 0 18px -6px rgb(var(--brass) / 0.35);
 }
 
-.catalog-tab[data-active='true']::after {
+/* Sidebar — abas verticais com indicador à esquerda */
+.catalog-sidebar .catalog-tab {
+  width: 100%;
+  text-align: left;
+  flex-shrink: 1;
+  padding: 0.55rem 0.85rem 0.55rem 0.95rem;
+  color: rgb(var(--vellum-faint));
+}
+
+.catalog-sidebar .catalog-tab:hover {
+  background: rgb(var(--brass) / 0.06);
+  color: rgb(var(--vellum-muted));
+}
+
+.catalog-sidebar .catalog-tab[data-active='true'] {
+  color: rgb(var(--brass-bright));
+  background: var(--tab-active-bg);
+  border-color: rgb(var(--brass) / 0.55);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--brass-bright) / 0.18),
+    inset 3px 0 0 rgb(var(--brass-bright)),
+    0 0 20px -8px rgb(var(--brass) / 0.4);
+}
+
+.catalog-sidebar .catalog-tab[data-active='true']::after {
   content: '';
   position: absolute;
-  left: 14%;
-  right: 14%;
-  bottom: -1px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgb(var(--brass)), transparent);
+  left: 0;
+  top: 14%;
+  bottom: 14%;
+  width: 3px;
+  background: linear-gradient(
+    180deg,
+    rgb(var(--brass) / 0.25),
+    rgb(var(--brass-bright)),
+    rgb(var(--brass) / 0.25)
+  );
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 8px rgb(var(--brass) / 0.45);
 }
 
-/* Header glass/steel */
-.catalog-header {
-  position: relative;
-  background: var(--catalog-header-bg);
+/* Sidebar glass/steel — position controlled by Tailwind (fixed desktop / relative sheet) */
+.catalog-sidebar {
+  background: var(--catalog-sidebar-bg);
   backdrop-filter: blur(20px) saturate(1.15);
   -webkit-backdrop-filter: blur(20px) saturate(1.15);
+  border-right: 1px solid rgb(var(--line) / 0.9);
   box-shadow:
-    inset 0 -1px 0 rgb(var(--line) / 0.9),
-    0 10px 32px rgb(var(--shade) / 0.14);
+    inset -1px 0 0 rgb(var(--line) / 0.45),
+    4px 0 24px rgb(var(--shade) / 0.08);
 }
 
-.catalog-header::before {
+.catalog-sidebar::before {
   content: '';
   position: absolute;
   inset-inline: 0;
@@ -790,16 +807,18 @@ body {
     rgb(var(--brass) / 0.35) 70%,
     transparent 100%
   );
+  pointer-events: none;
 }
 
-.catalog-header::after {
+.catalog-sidebar::after {
   content: '';
   position: absolute;
-  inset-inline: 12%;
-  bottom: 0;
-  height: 1px;
+  top: 8%;
+  bottom: 8%;
+  right: 0;
+  width: 1px;
   background: linear-gradient(
-    90deg,
+    180deg,
     transparent,
     rgb(var(--brass) / 0.15),
     transparent
@@ -807,18 +826,23 @@ body {
   pointer-events: none;
 }
 
+.catalog-mobile-bar {
+  background: var(--catalog-sidebar-bg);
+  backdrop-filter: blur(20px) saturate(1.15);
+  -webkit-backdrop-filter: blur(20px) saturate(1.15);
+}
+
 /* Noite — vidro mais denso, filete e sombra de separação */
-.dark .catalog-header {
+.dark .catalog-sidebar {
   backdrop-filter: blur(28px) saturate(1.35);
   -webkit-backdrop-filter: blur(28px) saturate(1.35);
   box-shadow:
     inset 0 1px 0 rgb(var(--mist) / 0.08),
-    inset 0 -1px 0 rgb(var(--line) / 0.85),
-    0 12px 40px rgb(0 0 0 / 0.45),
-    0 1px 0 rgb(var(--brass) / 0.08);
+    inset -1px 0 0 rgb(var(--line) / 0.85),
+    6px 0 32px rgb(0 0 0 / 0.35);
 }
 
-.dark .catalog-header::before {
+.dark .catalog-sidebar::before {
   background: linear-gradient(
     90deg,
     transparent 0%,
@@ -829,10 +853,11 @@ body {
   );
 }
 
-.dark .catalog-header::after {
-  inset-inline: 8%;
+.dark .catalog-sidebar::after {
+  top: 6%;
+  bottom: 6%;
   background: linear-gradient(
-    90deg,
+    180deg,
     transparent,
     rgb(var(--brass) / 0.28),
     transparent
@@ -900,6 +925,139 @@ body {
   .theme-toggle__label {
     display: inline;
   }
+}
+
+/* Font picker — prancha 00, cartões usinados */
+.font-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.font-picker-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.35rem;
+  min-height: 9.5rem;
+  padding: 0.85rem 0.9rem 0.75rem;
+  border-radius: 0.625rem;
+  border: 1px solid rgb(var(--line) / 0.92);
+  background:
+    linear-gradient(180deg, rgb(var(--mist) / 0.04) 0%, transparent 38%),
+    linear-gradient(180deg, rgb(var(--panel2)) 0%, rgb(var(--panel)) 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--mist) / 0.07),
+    0 1px 0 rgb(var(--shade) / 0.18);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease;
+}
+
+.font-picker-card:hover {
+  transform: translateY(-2px);
+  border-color: rgb(var(--brass-dim) / 0.55);
+  box-shadow:
+    inset 0 1px 0 rgb(var(--brass-bright) / 0.1),
+    0 0 0 1px rgb(var(--brass) / 0.12),
+    0 10px 24px -12px rgb(var(--shade) / 0.45);
+}
+
+.font-picker-card[data-active='true'] {
+  border-color: rgb(var(--brass) / 0.62);
+  background:
+    radial-gradient(ellipse 90% 70% at 50% -20%, rgb(var(--brass) / 0.14), transparent 58%),
+    linear-gradient(180deg, rgb(var(--panel2)) 0%, rgb(var(--panel)) 100%);
+  box-shadow:
+    var(--shadow-forged),
+    var(--shadow-brass),
+    inset 0 1px 0 rgb(var(--brass-bright) / 0.16);
+}
+
+.font-picker-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.font-picker-card__sample {
+  font-size: 2.35rem;
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: rgb(var(--vellum));
+}
+
+.font-picker-card__check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  border: 1px solid rgb(var(--brass) / 0.45);
+  background: rgb(var(--brass) / 0.14);
+  color: rgb(var(--brass-bright));
+  box-shadow: 0 0 12px -2px rgb(var(--brass) / 0.45);
+}
+
+.font-picker-card__numerals {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 1;
+  color: rgb(var(--brass-bright));
+  opacity: 0.92;
+}
+
+.font-picker-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.15rem;
+}
+
+.font-picker-card__name {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgb(var(--vellum));
+}
+
+.font-picker-card__chip {
+  flex-shrink: 0;
+  border-radius: 999px;
+  border: 1px solid rgb(var(--line) / 0.85);
+  padding: 0.1rem 0.45rem;
+  font-family: "Space Mono", ui-monospace, monospace;
+  font-size: 0.5625rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--vellum-faint));
+  background: rgb(var(--ink) / 0.35);
+}
+
+.font-picker-card[data-active='true'] .font-picker-card__chip {
+  border-color: rgb(var(--brass) / 0.35);
+  color: rgb(var(--brass-bright));
+}
+
+.font-picker-card__tagline {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  color: rgb(var(--vellum-faint));
 }
 
 /* Empty state da vitrine */

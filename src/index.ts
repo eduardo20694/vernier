@@ -526,4 +526,82 @@ export {
 export { FeedPost, FeedList, type FeedPostProps, type FeedListProps } from './components/FeedPost'
 export { PropertyCard, PropertyGrid, type PropertyCardProps } from './components/PropertyCard'
 export { EventCard, EventGrid, type EventCardProps } from './components/EventCard'
+export { CpfCnpjInput, type CpfCnpjInputProps } from './components/CpfCnpjInput'
+export {
+  SensitiveData,
+  type SensitiveDataProps,
+  type SensitiveMaskPattern,
+} from './components/SensitiveData'
+export {
+  ClientCopyBlock,
+  type ClientCopyBlockProps,
+  type ClientCopyExtra,
+} from './components/ClientCopyBlock'
+export {
+  CreditOfferTable,
+  type CreditOfferTableProps,
+  type CreditOfferRow,
+} from './components/CreditOfferTable'
+export {
+  AuthorizationStatus,
+  type AuthorizationStatusProps,
+  type AuthorizationState,
+} from './components/AuthorizationStatus'
+export {
+  BankConvenioSelector,
+  type BankConvenioSelectorProps,
+  type BankConvenioItem,
+  type ConvenioProduct,
+} from './components/BankConvenioSelector'
+export {
+  BankAccountFields,
+  formatBankAccount,
+  type BankAccountFieldsProps,
+  type BankAccountValues,
+  type BankAccountErrors,
+  type BankAccountLabels,
+} from './components/BankAccountFields'
+export {
+  ResultPanel,
+  type ResultPanelProps,
+  type ResultPanelTab,
+  type ResultPanelMetaItem,
+} from './components/ResultPanel'
+export {
+  ProviderBanner,
+  type ProviderBannerProps,
+  type ProviderBannerVariant,
+} from './components/ProviderBanner'
+export { PdfEmbed, type PdfEmbedProps } from './components/PdfEmbed'
+export { RoleNav, type RoleNavProps, type RoleNavItem } from './components/RoleNav'
+export {
+  SimulationDiff,
+  type SimulationDiffProps,
+  type SimulationOffer,
+  type SimulationDiffLabels,
+} from './components/SimulationDiff'
+export {
+  stripDigits,
+  isValidCpf,
+  isValidCnpj,
+  formatCpf,
+  formatCnpj,
+  formatDocument,
+  isValidDocument,
+  documentComplete,
+  resolveDocumentKind,
+  type DocumentKind,
+} from './lib/br'
 export { cn } from './lib/cn'
+export {
+  FONT_PRESETS,
+  FONT_STORAGE_KEY,
+  DEFAULT_FONT_ID,
+  applyFont,
+  hydrateFont,
+  readStoredFont,
+  getFontPreset,
+  type VernierFontId,
+  type VernierFontPreset,
+  type VernierFontCategory,
+} from './lib/fonts'

@@ -10,8 +10,14 @@ import {
 import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
 import { cn } from '../lib/cn'
+import { Button } from './Button'
 
 type Tone = 'neutral' | 'brass' | 'verdigris' | 'rust'
+
+export interface ToastAction {
+  label: string
+  onClick: () => void
+}
 
 export interface ToastOptions {
   title: string
@@ -19,6 +25,8 @@ export interface ToastOptions {
   tone?: Tone
   /** Duração em ms. Passe 0 pra manter até o usuário fechar. */
   duration?: number
+  /** Ação opcional (ex.: desfazer, tentar novamente) */
+  action?: ToastAction
 }
 
 interface ToastItem extends ToastOptions {
@@ -77,6 +85,20 @@ function ToastCard({
         <p className={cn('font-display text-sm font-medium', toneAccent[tone])}>{item.title}</p>
         {item.description && (
           <p className="mt-0.5 text-xs text-vellum-muted">{item.description}</p>
+        )}
+        {item.action && (
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            className="mt-2 h-7 px-2 text-xs"
+            onClick={() => {
+              item.action?.onClick()
+              onDismiss(item.id)
+            }}
+          >
+            {item.action.label}
+          </Button>
         )}
       </div>
       <button

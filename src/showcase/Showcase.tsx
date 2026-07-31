@@ -214,6 +214,9 @@ import { CatalogShell, Plate } from './CatalogShell'
 import { Plates99to152 } from './Plates99to152'
 import { Plates153to164 } from './Plates153to164'
 import { Plates165to168 } from './Plates165to168'
+import { Plates169to180 } from './Plates169to180'
+import { FontPicker } from './FontPicker'
+import { getFontPreset, readStoredFont, type VernierFontId } from '../lib/fonts'
 
 const MONTHLY_CHART = [
   { mes: 'Jan', leituras: 42, alertas: 8, meta: 50 },
@@ -429,6 +432,8 @@ function ToastDemo() {
 }
 
 function ShowcaseBody() {
+  const [activeFontId, setActiveFontId] = useState<VernierFontId>(() => readStoredFont())
+  const activeFont = getFontPreset(activeFontId)
   const [switchOn, setSwitchOn] = useState(true)
   const [page, setPage] = useState(3)
   const [region, setRegion] = useState('sa-east-1')
@@ -539,12 +544,14 @@ function ShowcaseBody() {
       </section>
 
       <Plate number="00" title="Tipografia">
-        <Stack gap="lg" className="w-full max-w-2xl">
-          <div>
+        <Stack gap="lg" className="w-full max-w-5xl">
+          <FontPicker onFontChange={setActiveFontId} />
+
+          <div className="w-full max-w-2xl">
             <Overline tone="brass">Hierarquia</Overline>
             <Balance as="div">
               <Display size="sm" className="mt-2">
-                Display em <GradientText>Fraunces</GradientText>
+                Display em <GradientText>{activeFont.name}</GradientText>
               </Display>
             </Balance>
             <Subtitle className="mt-3">
@@ -608,8 +615,8 @@ function ShowcaseBody() {
           <div className="space-y-3">
             <Overline tone="brass">Listas</Overline>
             <List>
-              <li>Fraunces no display</li>
-              <li>General Sans no corpo</li>
+              <li>{activeFont.displayFamily.split(',')[0].replace(/"/g, '')} no display</li>
+              <li>{activeFont.sansFamily.split(',')[0].replace(/"/g, '')} no corpo</li>
               <li>Space Mono nos dados</li>
             </List>
             <OrderedList>
@@ -653,8 +660,8 @@ function ShowcaseBody() {
             <blockquote>Prose também estiliza blockquote e o separador abaixo.</blockquote>
             <hr />
             <ul>
-              <li>Fraunces no display (optical size)</li>
-              <li>General Sans no corpo</li>
+              <li>{activeFont.displayFamily.split(',')[0].replace(/"/g, '')} no display (optical size)</li>
+              <li>{activeFont.sansFamily.split(',')[0].replace(/"/g, '')} no corpo</li>
               <li>Space Mono nos dados</li>
             </ul>
           </Prose>
@@ -2556,6 +2563,8 @@ function ShowcaseBody() {
       <Plates153to164 />
 
       <Plates165to168 />
+
+      <Plates169to180 />
     </>
   )
 }

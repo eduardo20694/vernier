@@ -201,6 +201,18 @@ export const PLATES: PlateMeta[] = [
   { number: '166', title: 'Feed post', category: 'layout', keywords: 'feed post social timeline curtir comentar' },
   { number: '167', title: 'Property card', category: 'layout', keywords: 'property card imóvel real estate quartos preço' },
   { number: '168', title: 'Event card', category: 'layout', keywords: 'event card evento ingresso data venue' },
+  { number: '169', title: 'CPF/CNPJ', category: 'forms', keywords: 'cpf cnpj validação dígito documento br' },
+  { number: '170', title: 'Dado sensível', category: 'forms', keywords: 'sensitive mask revelar cpf telefone benefício' },
+  { number: '171', title: 'Copiar cliente', category: 'forms', keywords: 'client copy block nome cpf margem' },
+  { number: '172', title: 'Oferta crédito', category: 'dados', keywords: 'credit offer parcelas taxa cet simulador' },
+  { number: '173', title: 'Autorização', category: 'feedback', keywords: 'authorization status consig aguardando countdown' },
+  { number: '174', title: 'Banco convênio', category: 'forms', keywords: 'bank convenio clt fgts inss seletor' },
+  { number: '175', title: 'Conta bancária', category: 'forms', keywords: 'agência conta dígito bank account' },
+  { number: '176', title: 'Result panel', category: 'layout', keywords: 'result panel consulta kpis abas margem' },
+  { number: '177', title: 'Provider banner', category: 'feedback', keywords: 'provider banner consig timeout indisponível' },
+  { number: '178', title: 'PDF embed', category: 'layout', keywords: 'pdf documento embed contrato' },
+  { number: '179', title: 'Role nav', category: 'nav', keywords: 'role nav admin coordenador badge' },
+  { number: '180', title: 'Diff simulação', category: 'dados', keywords: 'simulation diff oferta a b comparar' },
 ]
 
 export const TOTAL_PLATES = PLATES.length

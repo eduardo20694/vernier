@@ -37,9 +37,6 @@ export function ThemeToggle({
 
   function toggle() {
     const next: VernierTheme = isDark ? 'light' : 'dark'
-    const root = document.documentElement
-    root.classList.add('theme-switching')
-    window.setTimeout(() => root.classList.remove('theme-switching'), 280)
     applyTheme(next)
     setTheme(next)
     onThemeChange?.(next)
