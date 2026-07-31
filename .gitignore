@@ -36,6 +36,7 @@ Desktop.ini
 .cache/
 coverage/
 *.local
+vernier-*-check.png
 
 # Nested / leftover clones (not part of Vernier)
 lib_componentes/
