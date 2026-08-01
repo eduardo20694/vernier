@@ -32,6 +32,7 @@ Desktop.ini
 
 # Tooling leftovers
 .playwright-mcp/
+.wrangler/
 .turbo/
 .cache/
 coverage/
